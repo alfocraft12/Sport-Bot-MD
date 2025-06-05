@@ -23,7 +23,7 @@ font: 'chrome',
 align: 'center',
 colors: ['red']
 });
-say(`Developed By • Xi_Miguelon`, {
+say(`Developed By • Alfocraft 12`, {
 font: 'console',
 align: 'center',
 colors: ['yellow']
