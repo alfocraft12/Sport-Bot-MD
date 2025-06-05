@@ -11,35 +11,29 @@ global.confirmCode = ''
 
 //• ↳𝑺𝑶𝑳𝑶 𝑫𝑬𝑺𝑨𝑹𝑹𝑶𝑳𝑳𝑨𝑫𝑶𝑹𝑬𝑺 𝑨𝑷𝑹𝑶𝑩𝑨𝑫𝑶𝑺
 global.owner = [
-['5218711426787', 'CREADOR', true],
-['5216566753569', '󠁖󠁖󠁖󠁖󠁖󠁖󠁻󠁻𝐇𝐮ⷡ𝐓ⷪ𝐚ⷮ𝐨-𝐌𝐃󠁂󠀧󠁂🈀', true],
-['5213142183828', 'ramonxd', true],
-['5351524614'],
-['5217561063371'],
-['573012482597'],
-['5218715746374'],
-['5213141169709']
+['573146171942', 'CREADOR', true],
+['573009585896', '󠁖󠁖󠁖󠁖󠁖󠁖󠁻󠁻𝐇𝐮ⷡ𝐓ⷪ𝐚ⷮ𝐨-𝐌𝐃󠁂󠀧󠁂🈀', true],
 ];
 
 //• ↳𝑺𝑶𝑳𝑶 𝑴𝑶𝑫𝑬𝑹𝑨𝑫𝑶𝑹𝑬𝑺!
-global.mods = ['5351524614', '5218711426787', '', '', '']
+global.mods = ['573146171942', '584248116351', '', '', '']
 
-global.suittag = ['5218711426787']
-global.prems = []
+global.suittag = ['573146171942']
+global.prems = ['573146171942', '573103257152']
 
 //• ↳ ◜𝑴𝑨𝑹𝑪𝑨𝑺 𝑫𝑬 𝑨𝑮𝑼𝑨◞ • 💌
 global.packsticker = '★彡( Ӿł_₥ł₲ɄɆⱠØ₦77ӾӾ )彡★'
-global.packname = '󠁖󠁖󠁖󠁖󠁖󠁖󠁻󠁻𝐇𝐮ⷡ𝐓ⷪ𝐚ⷮ𝐨-𝐌𝐃󠁂󠀧󠁂🈀'
-global.author = 'ɦʊȶǟօ-քʀօʏɛƈȶ'
-global.wm = 'ɦʊȶǟօ-քʀօʏɛƈȶ';
+global.packname = '󠁖󠁖󠁖󠁖󠁖󠁖󠁻󠁻Sport-bot'
+global.author = 'SPORT-BOT'
+global.wm = 'SPORT-mamalo';
 global.titulowm = '★彡( Ӿł_₥ł₲ɄɆⱠØ₦77ӾӾ )彡★';
-global.titulowm2 = 'ɦʊȶǟօ-քʀօʏɛƈȶ'
-global.igfg = 'ɦʊȶǟօ-քʀօʏɛƈȶ'
-global.botname = 'ɦʊȶǟօ-քʀօʏɛƈȶ'
+global.titulowm2 = 'alfocraft-12'
+global.igfg = 'DcA-Alfo'
+global.botname = 'sPORT-bOT'
 global.dev = '★彡( Ӿł_₥ł₲ɄɆⱠØ₦77ӾӾ )彡★'
-global.textbot = 'ɦʊȶǟօ-քʀօʏɛƈȶ'
-global.gt = '𝐇𝐮ⷡ𝐓ⷪ𝐚ⷮ𝐨-𝐌𝐃󠁂󠀧󠁂🈀';
-global.namechannel = 'ɦʊȶǟօ-քʀօʏɛƈȶ'
+global.textbot = 'EXTENSION-DE-DOMINIO'
+global.gt = 'tu-mama-esta-buena';
+global.namechannel = 'DcA-Oficial'
 global.vs = 'V2'
 global.vsJB = '5.0'
 
@@ -99,15 +93,15 @@ ch5: '120363420992828502@newsletter',
 }
 
 //• ↳ ◜𝑳𝑰𝑵𝑲𝑺◞ • 🌿
-global.gp4 = 'https://chat.whatsapp.com/LcifaLUrmww6CPT27IuSAa' //Grupo Oficial De Hutao
-global.gp1 = 'https://chat.whatsapp.com/GFyLX1dDDxI0utho5GBmJI' //Grupo 
+global.gp4 = 'null' //Grupo Oficial De Hutao
+global.gp1 = 'null' //Grupo 
 global.gp2 = 'GE1wUxAsLleAxfCVvtsp1x' //Grupo
-global.comunidad1 = 'https://chat.whatsapp.com/GPEtINYPyIB6a6S55ZJcAO' //Comunidad Megumin
-global.channel = 'https://whatsapp.com/channel/0029Vb7Ji66KbYMTYLU9km3p' //Canal Oficial
+global.comunidad1 = 'null' //Comunidad DcA
+global.channel = 'https://whatsapp.com/channel/0029Vb5q7tBHwXbKdqGRR72F' //Canal Oficial
 global.yt = 'https://youtube.com/@davidchian4957' //Canal De Youtube
-global.md = 'https://github.com/CheirZ' //Github Oficial
-global.correo = 'miguel.doce12000@outlook.com'
-global.cn ='https://whatsapp.com/channel/0029VacDy0R6hENqnTKnG820';
+global.md = 'null' //Github Oficial
+global.correo = 'alfocraft12fans@gmail.com'
+global.cn ='null';
 
 var ase = new Date(); var hour = ase.getHours(); switch(hour){ case 0: hour = 'Linda Mañana'; break; case 1: hour = 'Linda Mañana'; break; case 2: hour = 'Linda Mañana'; break; case 3: hour = 'Linda Mañana'; break; case 4: hour = 'linda mañana'; break; case 5: hour = 'Linda Mañana'; break; case 6: hour = 'Linda Mañana'; break; case 7: hour = 'Linda Mañana'; break; case 8: hour = 'Linda Mañana'; break; case 9: hour = 'Linda Mañana'; break; case 10: hour = 'Lindo Dia'; break; case 11: hour = 'Lindo Dia'; break; case 12: hour = 'Lindo Dia'; break; case 13: hour = 'Lindo Dia'; break; case 14: hour = 'Linda Tarde'; break; case 15: hour = 'Linda Tarde'; break; case 16: hour = 'Linda Tarde'; break; case 17: hour = 'Linda Tarde'; break; case 18: hour = 'Linda Noche'; break; case 19: hour = 'Linda Noche'; break; case 20: hour = 'Linda Noche'; break; case 21: hour = 'Linda Noche'; break; case 22: hour = 'Linda Noche'; break; case 23: hour = 'Linda Noche'; break;}
 global.saludo = '🍭' + hour;
