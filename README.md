@@ -21,7 +21,8 @@ Ideal para clanes, comunidades de juegos y grupos gaming que buscan control, div
 **🧠 ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:**
 
 # 🔓 Dar permisos al almacenamiento
-> cd && termux-setup-storage
+```bash
+cd && termux-setup-storage```
 
 # 🔄 Actualizar paquetes
 > apt-get update -y && apt-get upgrade -y
