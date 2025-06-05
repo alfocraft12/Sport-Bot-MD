@@ -21,26 +21,31 @@ Ideal para clanes, comunidades de juegos y grupos gaming que buscan control, div
 **🧠 ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:**
 
 # 🔓 Dar permisos al almacenamiento
-```bash
-cd && termux-setup-storage 
-bash```
+
+> cd && termux-setup-storage
 
 # 🔄 Actualizar paquetes
+
 > apt-get update -y && apt-get upgrade -y
 
 # 📦 Instalar dependencias necesarias
+
 > pkg install -y git nodejs ffmpeg imagemagick yarn
 
 # 🧠 Clonar tu repositorio personalizado
+
 > git clone https://github.com/alfocraft12/Sport-Bot-MD
 
 # 📁 Entrar al directorio del bot
+
 > cd Sport-Bot-MD
 
 # 📥 Instalar dependencias del proyecto
+
 > yarn install
 > npm install
 > npm update
 
 # 🚀 Iniciar el bot
+
 > npm start
