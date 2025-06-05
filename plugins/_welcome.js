@@ -1,50 +1,36 @@
-let WAMessageStubType = (await import('@whiskeysockets/baileys')).default;
-import fetch from 'node-fetch';
+import { WAMessageStubType } from '@whiskeysockets/baileys'
+import fetch from 'node-fetch'
 
 export async function before(m, { conn, participants, groupMetadata }) {
-  if (!m.messageStubType || !m.isGroup) return true;
+  if (!m.messageStubType || !m.isGroup) return true
 
-  let vn = 'https://qu.ax/Jinc.mp3';
-  let vn2 = 'https://qu.ax/ujpr.mp3';
-  let chat = global.db.data.chats[m.chat];
-  const getMentionedJid = () => {
-    return m.messageStubParameters.map(param => `${param}@s.whatsapp.net`);
-  };
+  let who = m.messageStubParameters[0]
+  let taguser = `@${who.split('@')[0]}`
+  let chat = global.db.data.chats[m.chat]
+  let defaultImage = 'https://cdnmega.vercel.app/media/gsw1gLhC@ew68pKDxFue1JI_z7IgeAiR61Swwz5QS0aChvcZM9CI';
 
-  let who = m.messageStubParameters[0] + '@s.whatsapp.net';
-  let user = global.db.data.users[who];
+  if (chat.welcome) {
+    let img;
+    try {
+      let pp = await conn.profilePictureUrl(who, 'image');
+      img = await (await fetch(pp)).buffer();
+    } catch {
+      img = await (await fetch(defaultImage)).buffer();
+    }
 
-  let userName = user ? user.name : await conn.getName(who);
+  const welcomeMessage = global.db.data.chats[m.chat]?.welcomeMessage || 'Bienvenido/a :';
 
- if (chat.welcome && m.messageStubType === 27) {
-    this.sendMessage(m.chat, { audio: { url: vn }, 
-    contextInfo: { forwardedNewsletterMessageInfo: { 
-    newsletterJid: channelRD.id, 
-    serverMessageId: '', 
-    newsletterName: channelRD.name }, forwardingScore: 9999999, isForwarded: true, mentionedJid: getMentionedJid(), "externalAdReply": { 
-    "title":`♡︎✿︎𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘ꨄ︎ఌ︎`, 
-    "body": `${userName}`, 
-    "previewType": "PHOTO", 
-    "thumbnailUrl": null,
-    "thumbnail": icons, 
-    "sourceUrl": redes, 
-    "showAdAttribution": true}}, 
-     seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
-}
+    if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
+    let bienvenida = `┏╼★${textbot}\n┋「 Bienvenido 」\n┗╼★ 「 @${m.messageStubParameters[0].split`@`[0]} 」\n ┋❖ ${welcomeMessage}\n ┋❀  ${groupMetadata.subject}\n ┗━━━━━━━━━━━━━━━┅ ⳹\n> ✐ Puedes usar *#profile* para ver tu perfil.`
+      await conn.sendMessage(m.chat, { image: img, caption: bienvenida, mentions: [who] }, { quoted: estilo })
+    } else if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE || m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE) {
 
-  if (chat.welcome && (m.messageStubType === 28 || m.messageStubType === 32)) {
-    this.sendMessage(m.chat, { audio: { url: vn2 }, 
-    contextInfo: { forwardedNewsletterMessageInfo: { 
-    newsletterJid: channelRD.id, 
-    serverMessageId: '', 
-    newsletterName: channelRD.name }, forwardingScore: 9999999, isForwarded: true, mentionedJid: getMentionedJid(), "externalAdReply": { 
-    "title": `❀☹︎𝙰𝚍𝚒𝚘𝚜☹︎☯︎`, 
-    "body": `${userName}, se despide.`, 
-    "previewType": "PHOTO", 
-    "thumbnailUrl": null,
-    "thumbnail": icons, 
-    "sourceUrl": redes, 
-    "showAdAttribution": true}}, 
-     seconds: '4556', ptt: true, mimetype: 'audio/mpeg', fileName: `error.mp3` }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+const despMessage = global.db.data.chats[m.chat]?.despMessage || 'Se Fue😹';
+
+     let bye = `┏╼★${textbot}\n┋「 ADIOS 👋 」\n┗╼★ 「 @${m.messageStubParameters[0].split`@`[0]} 」\n ┋❖ ${despMessage}\n ┋❀ Jamás te quisimos aquí\n ┗━━━━━━━━━━━━━━━┅ ⳹\n> ${dev}`
+      await conn.sendMessage(m.chat, { image: img, caption: bye, mentions: [who] }, { quoted: estilo })
+    }
   }
+
+  return true
 }
