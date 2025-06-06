@@ -1,6 +1,6 @@
 import {googleImage} from '@bochilteam/scraper';
 const handler = async (m, {conn, text, usedPrefix, command}) => {
-  if (!text) throw `*🂱 Uso Correcto: ${usedPrefix + command} HuTao*`;
+  if (!text) throw `*🂱 Uso Correcto: ${usedPrefix + command} Sort*`;
   conn.reply(m.chat, '𖤍 *Descargando su imagen...*', m, rcanal) /*{
   contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, showAdAttribution: true,
   title: packname,
