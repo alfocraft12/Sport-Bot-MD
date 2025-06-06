@@ -39,7 +39,7 @@ case isCommand2:
 if (global.conn.user.jid == conn.user.jid)
 conn.reply(m.chat, `🔥 El Bot principal no se puede apagar.`, m, fake)
 else {
-await conn.reply(m.chat, `🦋 Adiós Hutao`, m, fake)
+await conn.reply(m.chat, `🦋 Adiós Sport-bot`, m, fake)
 conn.ws.close()}
 break
 
