@@ -72,17 +72,17 @@ global.jadi = 'jadibots'
 global.hutaoJadibts = true
 
 //• ↳ ◜𝑭𝑨𝑲𝑬 𝑬𝑺𝑻𝑰𝑳𝑶◞ • 🪩
-global.estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: '󠁖󠁖󠁖󠁖󠁖󠁖󠁻󠁻𝐇𝐮ⷡ𝐓ⷪ𝐚ⷮ𝐨-𝐌𝐃󠁂󠀧󠁂🈀', orderTitle: 'Bang', thumbnail: catalogo, sellerJid: '0@s.whatsapp.net'}}}
+global.estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: '󠁖󠁖󠁖󠁖󠁖󠁖󠁻󠁻Sport-Bot🈀', orderTitle: 'Bang', thumbnail: catalogo, sellerJid: '0@s.whatsapp.net'}}}
 
-global.fakegif2 = { key: { participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { videoMessage: { title: 'HuTao', h: `Hmm`, seconds: '99999', gifPlayback: true, caption: '♡٨ﮩ٨ﮩﮩ٨ﮩﮩ٨ﮩ ᗷIEᑎᐯEᑎIᗪO ﮩ٨ﮩﮩ٨ﮩﮩ٨ﮩ٨♡', jpegThumbnail: logo5 }}};
+global.fakegif2 = { key: { participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { videoMessage: { title: 'Sport', h: `Hmm`, seconds: '99999', gifPlayback: true, caption: '♡٨ﮩ٨ﮩﮩ٨ﮩﮩ٨ﮩ ᗷIEᑎᐯEᑎIᗪO ﮩ٨ﮩﮩ٨ﮩﮩ٨ﮩ٨♡', jpegThumbnail: logo5 }}};
 
-global.fakegif3 = { key: { participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { videoMessage: { title: 'HuTao-MD', h: `Hmm`, seconds: '99999', gifPlayback: true, caption: '⚘݄𖠵⃕⁖𝐓𝐨𝐧𝐭𝐨 (￣へ ￣ ) ', jpegThumbnail: logo3 }}};
+global.fakegif3 = { key: { participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { videoMessage: { title: 'Sport-Bpt-MD', h: `Hmm`, seconds: '99999', gifPlayback: true, caption: '⚘݄𖠵⃕⁖𝐓𝐨𝐧𝐭𝐨 (￣へ ￣ ) ', jpegThumbnail: logo3 }}};
 
-global.fakegif4 = { key: { participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { videoMessage: { title: 'HuTao', h: `Hmm`, seconds: '99999', gifPlayback: true, caption: 'ཫ꙳✱( รՇเςкєгร )✱꙳ཀ', jpegThumbnail: logo5 }}};
+global.fakegif4 = { key: { participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { videoMessage: { title: 'Sport', h: `hmm`, seconds: '99999', gifPlayback: true, caption: 'ཫ꙳✱( รՇเςкєгร )✱꙳ཀ', jpegThumbnail: logo5 }}};
 
-global.estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: '󠁖󠁖󠁖󠁖󠁖󠁖󠁻󠁻𝐇𝐮ⷡ𝐓ⷪ𝐚ⷮ𝐨-𝐌𝐃󠁂󠀧󠁂🈀', orderTitle: 'Bang', thumbnail: catalogo, sellerJid: '0@s.whatsapp.net'}}}
+global.estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: '󠁖󠁖󠁖󠁖󠁖󠁖󠁻󠁻Sport-Bot🈀', orderTitle: 'Bang', thumbnail: catalogo, sellerJid: '0@s.whatsapp.net'}}}
 
-global.fgif2 = { key: {participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "6289643739077-1613049930@g.us" } : {})},message: {"videoMessage": { "title":`͟͞ ★彡( Ӿł_₥ł₲ɄɆⱠØ₦77ӾӾ )彡★͟͞`, "h": `Hmm`,'seconds': '99999', 'gifPlayback': 'true', 'caption': `ɦʊȶǟօ-քʀօʏɛƈȶ\n ★彡( Ӿł_₥ł₲ɄɆⱠØ₦77ӾӾ )彡★͟`, 'jpegThumbnail': logo4 }}}
+global.fgif2 = { key: {participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "6289643739077-1613049930@g.us" } : {})},message: {"videoMessage": { "title":`͟͞ ★彡Alfocraft 12 (DcA Alfo)彡★͟͞`, "h": `Hmm`,'seconds': '99999', 'gifPlayback': 'true', 'caption': `Sport-Bot-MD\n ★彡Alfocraft 12 (DcA Alfo)彡★͟`, 'jpegThumbnail': logo4 }}}
 
 global.ch = {
 ch1: '120363400754442188@newsletter',
