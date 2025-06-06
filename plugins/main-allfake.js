@@ -114,9 +114,9 @@ global.icono = [
 'https://cdn.donmai.us/original/90/2b/__hu_tao_xiangling_hu_tao_and_xiangling_genshin_impact_drawn_by_arikuigames1105__902b1950beac1798f009c8c67e82b867.jpg',
 ].getRandom()
 
-//global.rcanal = { contextInfo: { isForwarded: true, externalAdReply: { showAdAttribution: true, title: textbot, body: 'ఌ︎ 𝙃𝙪𝙏𝙖𝙤 𝙙𝙞𝙧𝙚𝙘𝙩𝙤𝙧𝙖 𝙣𝙪𝙢77', mediaUrl: null, description: null, previewType: "PHOTO", thumbnailUrl: icono, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false }}}; }
+//global.rcanal = { contextInfo: { isForwarded: true, externalAdReply: { showAdAttribution: true, title: textbot, body: 'ఌ︎ DcA oficial Bot', mediaUrl: null, description: null, previewType: "PHOTO", thumbnailUrl: icono, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false }}}; }
 
-global.rcanal = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: channelRD.id, serverMessageId: 100, newsletterName: channelRD.name, }, externalAdReply: { showAdAttribution: true, title: textbot, body: 'ఌ︎ 𝙃𝙪𝙏𝙖𝙤 𝙙𝙞𝙧𝙚𝙘𝙩𝙤𝙧𝙖 𝙣𝙪𝙢77', mediaUrl: null, description: null, previewType: "PHOTO", thumbnailUrl: icono, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false }, }, }}
+global.rcanal = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: channelRD.id, serverMessageId: 100, newsletterName: channelRD.name, }, externalAdReply: { showAdAttribution: true, title: textbot, body: 'ఌ︎ Sport Bot ', mediaUrl: null, description: null, previewType: "PHOTO", thumbnailUrl: icono, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false }, }, }}
 
 export default handler
 
