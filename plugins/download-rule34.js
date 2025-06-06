@@ -59,7 +59,7 @@ if (!db.data.chats[m.chat].nsfw && m.isGroup) return m.reply('🚩 *¡Estos coma
           mediaType: 1, 
           showAdAttribution: true,
           title: '❦︎𝗥𝘂𝗹𝗲34ఌ︎ꨄ',
-          body: '❀🔥❀❦ǶꓴƬ𐤠Θ-ꝒⱤΘƳƸƇƬ❧ ❀🦋❀',
+          body: '❀🔥❀❦Spory-Bot❧ ❀🦋❀',
           previewType: 0, 
           thumbnail: rule,
           sourceUrl: cn 
@@ -124,7 +124,7 @@ if (!db.data.chats[m.chat].nsfw && m.isGroup) return m.reply('🚩 *¡Estos coma
               text: `✨️ RESULTADO DE: ${text}`
             }),
             footer: proto.Message.InteractiveMessage.Footer.create({
-              text: "❤️‍🔥 HuTao-Proyect ❤️‍🔥"
+              text: "❤️‍🔥 Sport-Bot-MD ❤️‍🔥"
             }),
             header: proto.Message.InteractiveMessage.Header.create({
               hasMediaAttachment: false
