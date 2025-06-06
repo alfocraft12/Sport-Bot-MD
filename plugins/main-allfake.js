@@ -32,13 +32,13 @@ let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? c
 //let pp = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://telegra.ph/file/b91fd8009901954bdbe4a.jpg')
 
 //creador y otros
-global.creador = 'Wa.me/5218711426787'
+global.creador = 'Wa.me/573146171942'
 global.ofcbot = `${conn.user.jid.split('@')[0]}`
-global.asistencia = 'Wa.me/5218711426787'
-global.namechannel = 'ɦʊȶǟօ-քʀօʏɛƈȶ'
+global.asistencia = 'Wa.me/573146171942'
+global.namechannel = 'Sport-Bot-MD'
 global.namechannel2 = ''
-global.namegrupo = '✦͙͙͙*͙*❥⃝∗⁎.ʚ ʰᵘᵗᵃᵒ-ᵖʳᵒʸᵉᶜᵗ ɞ.⁎∗❥⃝**͙✦͙͙͙'
-global.namecomu = '𝗖𝗼𝗺𝘂𝗻𝗶𝗱𝗮𝗱 𝝡𝝣𝗚𝗨𝗠𝗜𝗡'
+global.namegrupo = '✦͙͙͙*͙*❥⃝∗⁎.ʚ null ɞ.⁎∗❥⃝**͙✦͙͙͙'
+global.namecomu = 'null'
 global.namecomu2 = ''
 global.colab1 = ''
 global.colab2 = ''
@@ -46,7 +46,7 @@ global.colab3 = ''
 
 //Ids channel
 global.canalIdH = ["120363371018732371@newsletter", "120363387958443019@newsletter", "120363420992828502@newsletter"]
-global.canalNombreH = ["һᥙ𝗍ᥲ᥆ ⍴r᥆ᥡᥱᥴ𝗍 - ᥲ᥎іs᥆s ☄︎", "──͟͞꘩𓎇̶𝐿̸𝑒̤𝑔֟֯፝𝑒⃯𝑛̷̈𝑑̤𝑠͡𔗓𝐵̸͜𝑜𝑡͜ꤩꤨ𝑠ꦁ⃯㍰ꫂ", "ᥫ᭡ s𝗍ᥱᥣᥣᥲr ᥕᥲ ᑲ᥆𝗍 - ᥙ⍴ძᥲ𝗍ᥱ ❀"]
+global.canalNombreH = ["Sport Bot", "Sport Bot", "Sport bot"]
 global.channelRD = await getRandomChannel()
 
 //Reacciones De Comandos.!
@@ -68,13 +68,13 @@ global.waittt =  'ꨄ︎ 🅱︎🅰︎🅹︎🅰︎🅽︎🅳︎🅾︎ 🆃�
 global.waitttt = 'ꨄ︎ 🅱︎🅰︎🅹︎🅰︎🅽︎🅳︎🅾︎ 🆃︎🆄︎ 🅲︎🅾︎🅽︎🆃︎🅴︎🅽︎🅸︎🅳︎🅾︎\n🄴🅂🄿🄴🅁🄰 🅄🄽 🄼🄾🄼🄴🄽🅃🄾';
 
 //Enlaces
-var grupo = 'https://chat.whatsapp.com/KxHaM2J0NWPDR4RU24OmFw'
-var canal = 'https://whatsapp.com/channel/0029Vb7Ji66KbYMTYLU9km3p'  
-var canal2 = 'https://whatsapp.com/channel/0029Vawz6Y91SWsyLezeAb0f'
-var git = 'https://github.com/CheirZ/HuTao-proyect.git' 
-var youtube = 'https://youtube.com/@davidchian4957' 
-var github = 'https://github.com/Cheirz/HuTao-Proyect' 
-let correo = 'miguel.doce12000@outlook.com'
+var grupo = 'NULL'
+var canal = 'https://whatsapp.com/channel/0029Vb5q7tBHwXbKdqGRR72F'  
+var canal2 = 'https://whatsapp.com/channel/0029Vb5q7tBHwXbKdqGRR72F'
+var git = 'https://github.com/alfocraft12/Sport-Bot-MD' 
+var youtube = 'https://youtube.com/@alfocraft-12' 
+var github = 'https://github.com/alfocraft12/Sport-Bot-MD' 
+let correo = 'alfocraft12fans@gmail.com'
 
 global.redes = [canal, canal2, git, youtube, github, correo].getRandom()
 
