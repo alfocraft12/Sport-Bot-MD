@@ -211,10 +211,10 @@ await conn.sendMessage(
     throw e
   }
 }
-handler.help = ['menu']
+handler.help = ['hutao']
 handler.tags = ['main']
-handler.command = ['menu', 'menú', 'help'] 
-handler.group =true
+handler.command = ['hutao'] 
+handler.group =false
 
 export default handler
 
