@@ -37,7 +37,7 @@ const handler = async (m, { conn, usedPrefix }) => {
 │
 │•°•°•°•°•°•°•°•°•°•°•°•°•°•°•°•
 │
-│➸ *＊✿❀𝐇𝐮𝐓𝐚𝐨-𝐌𝐃❀✿＊*
+│➸ *＊✿❀Sport-Bot-MD❀✿＊*
 ╰━━━━━━･❪ ❁ ❫ ･━━━━━━❖`.trim();
   const doc = [
     "pdf",
@@ -60,7 +60,7 @@ const handler = async (m, { conn, usedPrefix }) => {
 showAdAttribution: !![],
             mediaType: 0x1,
             previewType: "PHOTO",
-        title: "𝑩𝒐𝒕 𝑯𝒖𝑻𝒂𝒐-𝑴𝑫",
+        title: "𝑩𝒐𝒕 Sport-Bot-MD",
         thumbnail: imagen10,
         renderLargerThumbnail: !![],
         sourceUrl: "https://chat.whatsapp.com/KxHaM2J0NWPDR4RU24OmFw",
