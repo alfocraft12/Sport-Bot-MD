@@ -22,15 +22,15 @@ global.suittag = ['573146171942']
 global.prems = ['573146171942', '573103257152']
 
 //• ↳ ◜𝑴𝑨𝑹𝑪𝑨𝑺 𝑫𝑬 𝑨𝑮𝑼𝑨◞ • 💌
-global.packsticker = '★彡( Ӿł_₥ł₲ɄɆⱠØ₦77ӾӾ )彡★'
+global.packsticker = '★彡( DcA Alfo )彡★'
 global.packname = '󠁖󠁖󠁖󠁖󠁖󠁖󠁻󠁻Sport-bot'
 global.author = 'SPORT-BOT'
 global.wm = 'SPORT-mamalo';
-global.titulowm = '★彡( Ӿł_₥ł₲ɄɆⱠØ₦77ӾӾ )彡★';
+global.titulowm = '★彡( DcA Alfo )彡★';
 global.titulowm2 = 'alfocraft-12'
 global.igfg = 'DcA-Alfo'
 global.botname = 'sPORT-bOT'
-global.dev = '★彡( Ӿł_₥ł₲ɄɆⱠØ₦77ӾӾ )彡★'
+global.dev = '★彡( DcA Alfo )彡★'
 global.textbot = 'Sport bot MD by Alfo'
 global.gt = 'tu-mama-esta-buena';
 global.namechannel = 'DcA-Oficial'
