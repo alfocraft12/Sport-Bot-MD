@@ -17,6 +17,6 @@ ${listAdmin}
 handler.help = ['admins <texto>'];
 handler.tags = ['grupo'];
 handler.customPrefix = /a|@/i;
-handler.command =  ['admins <texto>', 'lideres <texto>'];
+handler.command = /^(admins|@admins|dmins)$/i;
 handler.group = true;
 export default handler;
