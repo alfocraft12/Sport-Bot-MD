@@ -25,14 +25,14 @@ global.prems = ['573146171942', '573103257152']
 global.packsticker = '★彡( DcA Alfo )彡★'
 global.packname = '󠁖󠁖󠁖󠁖󠁖󠁖󠁻󠁻Sport-bot'
 global.author = 'SPORT-BOT'
-global.wm = 'SPORT-mamalo';
+global.wm = 'SPORT-Inmortal';
 global.titulowm = '★彡( DcA Alfo )彡★';
 global.titulowm2 = 'alfocraft-12'
 global.igfg = 'DcA-Alfo'
 global.botname = 'sPORT-bOT'
 global.dev = '★彡( DcA Alfo )彡★'
-global.textbot = 'Sport bot MD by Alfo'
-global.gt = 'tu-mama-esta-buena';
+global.textbot = 'Sport-Bot'
+global.gt = 'Inm Alfo';
 global.namechannel = 'DcA-Oficial'
 global.vs = 'V2'
 global.vsJB = '5.0'
@@ -85,15 +85,15 @@ global.estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(fa
 global.fgif2 = { key: {participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "6289643739077-1613049930@g.us" } : {})},message: {"videoMessage": { "title":`͟͞ ★彡Alfocraft 12 (DcA Alfo)彡★͟͞`, "h": `Hmm`,'seconds': '99999', 'gifPlayback': 'true', 'caption': `Sport-Bot-MD\n ★彡Alfocraft 12 (DcA Alfo)彡★͟`, 'jpegThumbnail': logo4 }}}
 
 global.ch = {
-ch1: '120363400754442188@newsletter',
-ch2: '120363387958443019@newsletter',
-ch3: '120363371018732371@newsletter',
-ch4: '120363343811229130@newsletter',
-ch5: '120363420992828502@newsletter',
+ch1: '120363393102930979@newsletter',
+ch2: '120363393102930979@newsletter',
+ch3: '120363393102930979@newsletter',
+ch4: '120363393102930979@newsletter',
+ch5: '120363393102930979@newsletter',
 }
 
 //• ↳ ◜𝑳𝑰𝑵𝑲𝑺◞ • 🌿
-global.gp4 = 'null' //Grupo Oficial De Hutao
+global.gp4 = 'null' //Grupo Oficial De Sport-Bot 
 global.gp1 = 'null' //Grupo 
 global.gp2 = 'GE1wUxAsLleAxfCVvtsp1x' //Grupo
 global.comunidad1 = 'null' //Comunidad DcA
