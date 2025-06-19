@@ -309,14 +309,9 @@ __dirname: ___dirname,
 __filename
 })
 } catch (e) {
-// if (typeof e === 'string') continue
-console.error(e)
-/*for (let [jid] of global.owner.filter(([number, _, isDeveloper]) => isDeveloper && number)) {
-let data = (await conn.onWhatsApp(jid))[0] || {}
-if (data.exists)
-m.reply(`⧋〘📕 FORMATO ERRONEO 📕〙⧋\n\n❒ 𝗘𝗥𝗥𝗢𝗥:\n\`\`\`${format(e)}\`\`\`\n`.trim(), data.jid)
-}*/
-}}
+console.error(`Error in plugin ALL execution: ${name} - Message ID: ${m.key?.id}`, e);
+}
+}
 if (!opts['restrict'])
 if (plugin.tags && plugin.tags.includes('admin')) {
 // global.dfail('restrict', m, this)
@@ -338,6 +333,7 @@ typeof _prefix === 'string' ? // String?
 [[[], new RegExp]]
 ).find(p => p[1])
 if (typeof plugin.before === 'function') {
+try {
 if (await plugin.before.call(this, m, {
 match,
 conn: this,
@@ -356,6 +352,10 @@ __dirname: ___dirname,
 __filename
 }))
 continue
+} catch (e) {
+console.error(`Error in plugin BEFORE execution: ${name} - Message ID: ${m.key?.id}`, e);
+continue; // Skip main execution of this plugin if before fails
+}
 }
 if (typeof plugin !== 'function')
 continue
@@ -491,7 +491,7 @@ m.money = m.money || plugin.money || false
 } catch (e) {
 // Error occured
 m.error = e
-console.error(e)
+console.error(`Error in plugin MAIN execution: ${name} (Command: ${command}) - Message ID: ${m.key?.id}`, e);
 if (e) {
 let text = format(e)
 for (let key of Object.values(global.APIKeys))

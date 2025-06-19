@@ -222,30 +222,48 @@ process.on('uncaughtException', console.error)
 let isInit = true;
 let handler = await import('./handler.js')
 global.reloadHandler = async function(restatConn) {
-try {
-const Handler = await import(`./handler.js?update=${Date.now()}`).catch(console.error);
-if (Object.keys(Handler || {}).length) handler = Handler
-} catch (e) {
-console.error(e);
-}
-if (restatConn) {
-const oldChats = global.conn.chats
-try {
-global.conn.ws.close()
-} catch { }
-conn.ev.removeAllListeners()
-global.conn = makeWASocket(connectionOptions, {chats: oldChats})
-isInit = true
-}
-if (!isInit) {
-conn.ev.off('messages.upsert', conn.handler)
-conn.ev.off('connection.update', conn.connectionUpdate)
-conn.ev.off('creds.update', conn.credsUpdate)
-}
+    console.log('Reloading handler...');
+    try {
+        const Handler = await import(`./handler.js?update=${Date.now()}`).catch(console.error);
+        if (Object.keys(Handler || {}).length) handler = Handler
+    } catch (e) {
+        console.error(e);
+    }
+    if (restatConn) {
+        const oldChats = global.conn.chats
+        try {
+            if (conn.handler) {
+                conn.ev.off('messages.upsert', conn.handler);
+                console.log('Successfully removed messages.upsert listener.');
+            }
+            if (conn.connectionUpdate) {
+                conn.ev.off('connection.update', conn.connectionUpdate);
+                console.log('Successfully removed connection.update listener.');
+            }
+            if (conn.credsUpdate) {
+                conn.ev.off('creds.update', conn.credsUpdate);
+                console.log('Successfully removed creds.update listener.');
+            }
+            console.log('Event listeners removal process completed in reloadHandler.');
+            global.conn.ws.close()
+        } catch { }
+        // conn.ev.removeAllListeners(); // Kept commented out as per instruction
+        global.conn = makeWASocket(connectionOptions, {chats: oldChats})
+        isInit = true
+    }
+    if (!isInit) { // This block seems to handle non-restatConn reloads or initial setup.
+        // The explicit removal above should handle the restatConn case.
+        // This block might need adjustment if it's intended for other scenarios.
+        // For now, let's assume it's for the first run or specific cases.
+        if (conn.handler) conn.ev.off('messages.upsert', conn.handler)
+        if (conn.connectionUpdate) conn.ev.off('connection.update', conn.connectionUpdate)
+        if (conn.credsUpdate) conn.ev.off('creds.update', conn.credsUpdate)
+    }
 
-conn.handler = handler.handler.bind(global.conn)
-conn.connectionUpdate = connectionUpdate.bind(global.conn)
-conn.credsUpdate = saveCreds.bind(global.conn, true)
+    console.log('Re-attaching event listeners in reloadHandler...');
+    conn.handler = handler.handler.bind(global.conn)
+    conn.connectionUpdate = connectionUpdate.bind(global.conn)
+    conn.credsUpdate = saveCreds.bind(global.conn, true)
 
 const currentDateTime = new Date()
 const messageDateTime = new Date(conn.ev)
@@ -256,11 +274,11 @@ const chats = Object.entries(conn.chats).filter(([jid, chat]) => !jid.endsWith('
 const chats = Object.entries(conn.chats).filter(([jid, chat]) => !jid.endsWith('@g.us') && chat.isChats).map((v) => v[0])
 }
 
-conn.ev.on('messages.upsert', conn.handler)
-conn.ev.on('connection.update', conn.connectionUpdate)
-conn.ev.on('creds.update', conn.credsUpdate)
-isInit = false
-return true
+    conn.ev.on('messages.upsert', conn.handler)
+    conn.ev.on('connection.update', conn.connectionUpdate)
+    conn.ev.on('creds.update', conn.credsUpdate)
+    isInit = false
+    return true
 };
 
 /** Arranque nativo para subbots by - ReyEndymion >> https://github.com/ReyEndymion
@@ -425,23 +443,43 @@ originalConsoleMethod.apply(console, arguments)
 }}
 
 setInterval(async () => {
-if (stopped === 'close' || !conn || !conn.user) return
-await clearTmp()
-console.log(chalk.bold.cyanBright(`\n╭» 🟢 MULTIMEDIA 🟢\n│→ ARCHIVOS DE LA CARPETA TMP ELIMINADAS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― 🗑️♻️`))}, 1000 * 60 * 4) // 4 min 
+    if (stopped === 'close' || !conn || !conn.user) return
+    try {
+        await clearTmp()
+        console.log(chalk.bold.cyanBright(`\n╭» 🟢 MULTIMEDIA 🟢\n│→ ARCHIVOS DE LA CARPETA TMP ELIMINADAS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― 🗑️♻️`))
+    } catch (e) {
+        console.error('Error in clearTmp interval:', e);
+    }
+}, 1000 * 60 * 4) // 4 min
 
 setInterval(async () => {
-if (stopped === 'close' || !conn || !conn.user) return
-await purgeSession()
-console.log(chalk.bold.cyanBright(`\n╭» 🔵 ${global.sessions} 🔵\n│→ SESIONES NO ESENCIALES ELIMINADAS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― 🗑️♻️`))}, 1000 * 60 * 10) // 10 min
+    if (stopped === 'close' || !conn || !conn.user) return
+    try {
+        await purgeSession()
+        console.log(chalk.bold.cyanBright(`\n╭» 🔵 ${global.sessions} 🔵\n│→ SESIONES NO ESENCIALES ELIMINADAS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― 🗑️♻️`))
+    } catch (e) {
+        console.error('Error in purgeSession interval:', e);
+    }
+}, 1000 * 60 * 10) // 10 min
 
 setInterval(async () => {
-if (stopped === 'close' || !conn || !conn.user) return
-await purgeSessionSB()}, 1000 * 60 * 10) 
+    if (stopped === 'close' || !conn || !conn.user) return
+    try {
+        await purgeSessionSB()
+    } catch (e) {
+        console.error('Error in purgeSessionSB interval:', e);
+    }
+}, 1000 * 60 * 10)
 
 setInterval(async () => {
-if (stopped === 'close' || !conn || !conn.user) return
-await purgeOldFiles()
-console.log(chalk.bold.cyanBright(`\n╭» 🟠 ARCHIVOS 🟠\n│→ ARCHIVOS RESIDUALES ELIMINADAS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― 🗑️♻️`))}, 1000 * 60 * 10)
+    if (stopped === 'close' || !conn || !conn.user) return
+    try {
+        await purgeOldFiles()
+        console.log(chalk.bold.cyanBright(`\n╭» 🟠 ARCHIVOS 🟠\n│→ ARCHIVOS RESIDUALES ELIMINADAS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― 🗑️♻️`))
+    } catch (e) {
+        console.error('Error in purgeOldFiles interval:', e);
+    }
+}, 1000 * 60 * 10)
 
 _quickTest().then(() => conn.logger.info(chalk.bold(`🔵  H E C H O\n`.trim()))).catch(console.error)
 
