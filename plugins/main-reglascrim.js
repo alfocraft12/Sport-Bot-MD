@@ -38,7 +38,7 @@ let handler = async (m, { conn }) => {
 ${global.md}`.trim()
 
     // Enviar imagen con texto, sin contacto ni quote
-    await conn.sendFile(m.chat, 'ruta/de/tu/imagen.jpg', 'reglas.jpg', yaemori, m)
+    await conn.sendFile(m.chat, './src/reglascrim.jpg', 'reglascrim.jpg', yaemori, m)
 }
 
 handler.help = ['reglascrims']
