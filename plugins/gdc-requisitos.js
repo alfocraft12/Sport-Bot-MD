@@ -2,27 +2,39 @@ var handler = async (m, { conn, participants }) => {
   const users = participants.map(u => conn.decodeJid(u.id))
 
   const mensaje = `
-📌 *Requisitos para permanecer en el clan*
-1. Prueba de comando (anexo)
+📌 *REGLAS DEL GRUPO*
+1. Prueba.js
 
 — _El admin_
   `.trim()
 
-  // Caracter invisible para que las menciones queden ocultas
-  const invisible = String.fromCharCode(8206).repeat(850)
+  const fakeMsg = {
+    key: {
+      fromMe: false,
+      participant: "0@s.whatsapp.net",
+      remoteJid: m.chat
+    },
+    message: {
+      conversation: mensaje
+    }
+  }
 
-  await conn.relayMessage(
+  const msg = conn.cMod(
     m.chat,
-    {
+    generateWAMessageFromContent(m.chat, {
       extendedTextMessage: {
-        text: `${invisible}\n${mensaje}`,
+        text: mensaje,
         contextInfo: {
           mentionedJid: users
         }
       }
-    },
-    {}
+    }, { quoted: null, userJid: conn.user.id }),
+    mensaje,
+    conn.user.jid,
+    { mentions: users }
   )
+
+  await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id })
 }
 
 handler.help = ['requisitos']
