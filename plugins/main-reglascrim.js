@@ -1,8 +1,6 @@
-let handler = async (m, { conn, usedPrefix, command}) => {
+let handler = async (m, { conn }) => {
 
-let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
-
-let yaemori = `🎮 *REGLAS GENERALES* 🎮
+    let yaemori = `🎮 *REGLAS GENERALES* 🎮
 
 - *Se jugarán un total de 3 mapas:* (B / P / K) 🗺
 
@@ -34,12 +32,15 @@ let yaemori = `🎮 *REGLAS GENERALES* 🎮
 
 *•REGLAS DE COMPORTAMIENTO•*
 
-- Los jugadores deben comportarse de manera respetuos
+- Los jugadores deben comportarse de manera respetuosa y deportiva durante todo el Scrim🫱🏻‍🫲🏻
+- No se permitirá el uso de lenguaje ofensivo o inapropiado🚫
 
 ${global.md}`.trim()
-await conn.reply(m.chat, yaemori, m, fake)
 
+    // Enviar imagen con texto, sin contacto ni quote
+    await conn.sendFile(m.chat, 'ruta/de/tu/imagen.jpg', 'reglas.jpg', yaemori, m)
 }
+
 handler.help = ['reglascrims']
 handler.tags = ['main']
 handler.command = ['reglascrim', 'reglasdelscrim', 'reglasscrim', 'scrim']
@@ -50,7 +51,9 @@ const more = String.fromCharCode(8206)
 const readMore = more.repeat(4001)
 
 function clockString(ms) {
-let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
-let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
-let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
-return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')}
+    let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
+    let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
+    let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
+    return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
+}
+
