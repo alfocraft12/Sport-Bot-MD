@@ -25,9 +25,9 @@ var handler = async (m, { conn, participants }) => {
   )
 }
 
-handler.help = ['reglas']
+handler.help = ['requisitos']
 handler.tags = ['grupo']
-handler.command = ['reglas', 'rules', 'normas'] // Puedes cambiar los nombres
+handler.command = ['requisitos', 'gdc', 'guerra de clanes'] // Puedes cambiar los nombres
 
 handler.group = true
 handler.admin = true
