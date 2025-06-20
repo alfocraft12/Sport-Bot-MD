@@ -5,7 +5,7 @@ handler.command = /^(reglasclk|Reglasclk)$/i;
 export default handler;
 handler.admin = true
 handler.group = true
-handler.botAdmin = true
+handler.botAdmin = false
 
 global.reglasclk = `
 𝑹𝒆𝒈𝒍𝒂𝒔 𝑪𝑳𝑲🗒️
