@@ -40,9 +40,9 @@ ${global.md}`.trim()
 await conn.reply(m.chat, yaemori, m, fake)
 
 }
-handler.help = ['botreglas']
+handler.help = ['reglascrims']
 handler.tags = ['main']
-handler.command = ['botreglas', 'reglasdelbot', 'reglasbot', 'reglas']
+handler.command = ['reglascrim', 'reglasdelscrim', 'reglasscrim', 'scrim']
 handler.register = false
 export default handler
 
