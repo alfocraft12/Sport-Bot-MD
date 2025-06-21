@@ -39,7 +39,7 @@ handler.group = true;
 handler.register = false
 
 // handler.estrellas = 1
-handler.command = ['iagrosera, 'sportg', 'hdp']
+handler.command = ['iagrosera']
 
 export default handler
 
