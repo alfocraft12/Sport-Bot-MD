@@ -6,7 +6,7 @@ var handler = async (m, { conn }) => {
 *GUERRA DE CLANES 🗣*
 ————————————
 
-1. HORARIOS 🕙: 
+1. *HORARIOS 🕙:* 
 
 - *🇻🇪 Venezuela:*
  8:00 pm - 12:00 pm
