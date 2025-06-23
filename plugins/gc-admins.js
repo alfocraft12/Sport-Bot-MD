@@ -1,31 +1,30 @@
-const handler = async (m, { conn, participants, groupMetadata, args }) => {
-  const groupAdmins = participants.filter((p) => p.admin);
-  const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n');
-  const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
-  const pesan = args.join` `;
-  const oi = `» ${pesan}`;
-  const text = `🏆 Invocando a los Admins:  
-  
-${listAdmin}
+import { promises as fs } from 'fs'
+import path from 'path'
 
-🍭 Mensaje adicional: ${oi}
+var handler = async (m, { conn, participants }) => {
+  // Filtrar solo administradores (normales y superadmins)
+  const admins = participants
+    .filter(p => p.admin === 'admin' || p.admin === 'superadmin')
+    .map(p => p.id)
 
-『✦』Levantense nojoda y vayas a trabajar cuerda de bagos.`.trim();
+  const mensaje = `👮‍♂️ *Mención a los admins del grupo:*\n\n${admins.map(a => `@${a.split('@')[0]}`).join('\n')}`
 
-  await conn.sendMessage(
-    m.chat,
-    {
-      text,
-      mentions: [...groupAdmins.map((v) => v.id), owner]
-    },
-    { quoted: m }
-  );
-};
+  // Leer imagen desde la carpeta src
+  const imgPath = path.join('./src', 'admins.jpg')
+  const buffer = await fs.readFile(imgPath)
 
-handler.help = ['admins <texto>'];
-handler.tags = ['grupo'];
-handler.customPrefix = /a|@/i;
-handler.command = /^(admins|@admins|dmins)$/i;
-handler.group = true;
+  await conn.sendMessage(m.chat, {
+    image: buffer,
+    caption: mensaje,
+    mentions: admins
+  }, { quoted: m })
+}
 
-export default handler;
+handler.help = ['admins']
+handler.tags = ['grupo']
+handler.command = ['admins', 'mencionaradmins']
+
+handler.group = true
+
+export default handler
+
