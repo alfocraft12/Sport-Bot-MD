@@ -10,7 +10,7 @@ var handler = async (m, { conn, participants }) => {
   const mensaje = `👮‍♂️ *Admins del grupo:*\n\n${admins.map(a => `- 😎 @${a.split('@')[0]}`).join('\n')}`
 
   // Ruta de la imagen
-  const imgPath = path.join('./src', 'admins.jpeg')
+  const imgPath = path.join('./src', 'admins.jpg')
   const buffer = await fs.readFile(imgPath)
 
   await conn.sendMessage(m.chat, {
