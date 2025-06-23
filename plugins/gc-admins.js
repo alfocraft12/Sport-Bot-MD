@@ -2,15 +2,15 @@ import { promises as fs } from 'fs'
 import path from 'path'
 
 var handler = async (m, { conn, participants }) => {
-  // Filtrar solo administradores (normales y superadmins)
+  // Filtrar administradores (admin y superadmin)
   const admins = participants
     .filter(p => p.admin === 'admin' || p.admin === 'superadmin')
     .map(p => p.id)
 
-  const mensaje = `👮‍♂️ *Mención a los admins del grupo:*\n\n${admins.map(a => `@${a.split('@')[0]}`).join('\n')}`
+  const mensaje = `👮‍♂️ *Admins del grupo:*\n\n${admins.map(a => `- 😎 @${a.split('@')[0]}`).join('\n')}`
 
-  // Leer imagen desde la carpeta src
-  const imgPath = path.join('./src', 'admins.jpg')
+  // Ruta de la imagen
+  const imgPath = path.join('./src', 'admins.jpeg')
   const buffer = await fs.readFile(imgPath)
 
   await conn.sendMessage(m.chat, {
@@ -27,4 +27,3 @@ handler.command = ['admins', 'mencionaradmins']
 handler.group = true
 
 export default handler
-
