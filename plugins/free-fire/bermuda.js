@@ -14,7 +14,7 @@ let handler = async (m, { conn }) => {
     "participant": "0@s.whatsapp.net"
   }
 
-  let imagen = './src/freefire/bermuda.jpeg'
+  let imagen = './src/freefire/bermuda.jpeg' // ✅ Tu ruta real
 
   await conn.sendFile(m.chat, imagen, 'bermuda.jpeg', '', m, false, fkontak)
 }
