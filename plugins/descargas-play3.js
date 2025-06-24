@@ -4,7 +4,6 @@ import yts from 'yt-search'
 const handler = async (m, { conn, text, command }) => {
   if (!text.trim()) return m.reply('🎵 Ingresa el nombre del video a buscar.');
 
-  // Buscar en YouTube
   const search = await yts(text);
   if (!search.videos.length) return m.reply('❌ No se encontraron resultados.');
 
@@ -18,15 +17,15 @@ const handler = async (m, { conn, text, command }) => {
 🗓️ *Publicado:* ${video.ago}
 🔗 *Enlace:* ${url}`;
 
-  // Enviar información con miniatura
   await conn.sendMessage(m.chat, {
     image: { url: video.thumbnail },
     caption: info
   }, { quoted: m });
 
-  // Comando play = audio
-  if (command === 'play') {
+  // AUDIO para comando play3
+  if (command === 'play3') {
     try {
+      await m.reply('🔊 Descargando audio, espera un momento...');
       const res = await fetch(`https://api.zenkey.my.id/api/download/ytmp3?url=${url}`);
       const json = await res.json();
       if (!json.status || !json.result?.url) throw 'No se pudo descargar el audio.';
@@ -41,9 +40,10 @@ const handler = async (m, { conn, text, command }) => {
     }
   }
 
-  // Comando play2 o ytmp4 = video
-  if (command === 'play2' || command === 'ytmp4') {
+  // VIDEO para play2 o ytmp42
+  if (command === 'play2' || command === 'ytmp42') {
     try {
+      await m.reply('📽️ Descargando video, espera un momento...');
       const res = await fetch(`https://api.zenkey.my.id/api/download/ytmp4?url=${url}`);
       const json = await res.json();
       if (!json.status || !json.result?.url) throw 'No se pudo descargar el video.';
@@ -60,8 +60,8 @@ const handler = async (m, { conn, text, command }) => {
   }
 }
 
-handler.command = ['play2', 'play3', 'ytmp42']
-handler.help = ['play3 <nombre>', 'play23 <nombre>', 'ytmp42 <nombre>']
+handler.command = ['play3', 'play23', 'ytmp42']
+handler.help = ['play3 <nombre>', 'play2 <nombre>', 'ytmp42 <nombre>']
 handler.tags = ['downloader']
 handler.group = true
 
