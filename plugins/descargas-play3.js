@@ -22,56 +22,23 @@ const handler = async (m, { conn, text, command }) => {
     caption: info
   }, { quoted: m });
 
-  // MP3 - comando play3
+  // 📥 MP3 con API funcional actual
   if (command === 'play3') {
-  try {
-    await m.reply('🔊 Descargando audio desde Akuari API...');
-
-    const res = await fetch(`https://api.akuari.my.id/downloader/youtube2?link=${encodeURIComponent(url)}`);
-    const json = await res.json();
-    const audioUrl = json.mp3?.url;
-
-    if (!audioUrl) throw new Error('No se encontró el enlace de audio.');
-
-    await conn.sendMessage(m.chat, {
-      audio: { url: audioUrl },
-      mimetype: 'audio/mpeg',
-      ptt: false,
-      contextInfo: {
-        externalAdReply: {
-          title: 'Sport-Bot',
-          body: video.title,
-          thumbnailUrl: video.thumbnail,
-          mediaUrl: url,
-          sourceUrl: url,
-          renderLargerThumbnail: true
-        }
-      }
-    }, { quoted: m });
-
-  } catch (e) {
-    console.error('Error MP3:', e.message);
-    return m.reply(`❌ Error al descargar el audio.\n📄 ${e.message}`);
-  }
-}
-
-
-  // MP4 - comandos play23 o ytmp42
-  if (command === 'play23' || command === 'ytmp42') {
     try {
-      await m.reply('📽️ Descargando video desde Y2Mate...');
-      const res = await fetch(`https://aemt.me/downloadmp4?url=${encodeURIComponent(url)}`);
-      const json = await res.json();
+      await m.reply('🎧 Descargando audio desde servidor alternativo...');
 
-      if (!json || !json.result?.url) throw new Error('No se pudo obtener el video.');
+      const api = await fetch(`https://skizo.tech/api/yta?url=${url}`);
+      const res = await api.json();
+
+      if (!res || !res.result?.url) throw new Error('No se encontró el enlace de audio.');
 
       await conn.sendMessage(m.chat, {
-        video: { url: json.result.url },
-        mimetype: 'video/mp4',
-        fileName: `${video.title}.mp4`,
+        audio: { url: res.result.url },
+        mimetype: 'audio/mpeg',
+        ptt: false,
         contextInfo: {
           externalAdReply: {
-            title: "Sport-Bot",
+            title: 'Sport-Bot',
             body: video.title,
             thumbnailUrl: video.thumbnail,
             mediaUrl: url,
@@ -80,12 +47,45 @@ const handler = async (m, { conn, text, command }) => {
           }
         }
       }, { quoted: m });
+
     } catch (e) {
-      console.error('Error MP4:', e.message);
-      return m.reply(`❌ Error al descargar el video.`);
+      console.error('ERROR MP3:', e);
+      return m.reply(`❌ Error al descargar el audio.\n📄 ${e.message}`);
     }
   }
-}
+
+  // 📥 MP4 (play23 o ytmp42)
+  if (command === 'play23' || command === 'ytmp42') {
+    try {
+      await m.reply('📽️ Descargando video desde servidor alternativo...');
+
+      const api = await fetch(`https://skizo.tech/api/ytv?url=${url}`);
+      const res = await api.json();
+
+      if (!res || !res.result?.url) throw new Error('No se encontró el enlace de video.');
+
+      await conn.sendMessage(m.chat, {
+        video: { url: res.result.url },
+        mimetype: 'video/mp4',
+        fileName: `${video.title}.mp4`,
+        contextInfo: {
+          externalAdReply: {
+            title: 'Sport-Bot',
+            body: video.title,
+            thumbnailUrl: video.thumbnail,
+            mediaUrl: url,
+            sourceUrl: url,
+            renderLargerThumbnail: true
+          }
+        }
+      }, { quoted: m });
+
+    } catch (e) {
+      console.error('ERROR MP4:', e);
+      return m.reply(`❌ Error al descargar el video.\n📄 ${e.message}`);
+    }
+  }
+};
 
 handler.command = ['play3', 'play23', 'ytmp42']
 handler.help = ['play3 <nombre>', 'play23 <nombre>', 'ytmp42 <nombre>']
@@ -93,4 +93,3 @@ handler.tags = ['downloader']
 handler.group = true
 
 export default handler
-
