@@ -1,22 +1,22 @@
 let handler = async (m, { conn }) => {
-  let fkontak = {
-    "key": {
-      "participants": "0@s.whatsapp.net",
-      "remoteJid": "status@broadcast",
-      "fromMe": false,
-      "id": "Halo"
-    },
-    "message": {
-      "contactMessage": {
-        "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:;Sport-Bot;;;\nFN:Sport-Bot\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
-      }
-    },
-    "participant": "0@s.whatsapp.net"
+  let fake = {
+    forwardingScore: 999,
+    isForwarded: true,
+    externalAdReply: {
+      title: "Sport-Bot Noticias",
+      body: "🗺️ Mapa competitivo: Bermuda",
+      mediaType: 1,
+      previewType: 0,
+      thumbnailUrl: null,
+      renderLargerThumbnail: true,
+      showAdAttribution: true,
+      sourceUrl: "https://whatsapp.com/channel/0029Vb3yM0T2v1ItNDrGIY3v" // ⚠️ Reemplaza con el link real de tu canal
+    }
   }
 
-  let imagen = './src/freefire/bermuda.jpeg' // ✅ Tu ruta real
+  let imagen = './src/freefire/bermuda.jpeg'
 
-  await conn.sendFile(m.chat, imagen, 'bermuda.jpeg', '', m, false, fkontak)
+  await conn.sendFile(m.chat, imagen, 'bermuda.jpeg', '', m, false, fake)
 }
 
 handler.command = ['bermuda']
