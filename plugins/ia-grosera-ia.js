@@ -32,7 +32,7 @@ let handler = async (m, { conn, usedPrefix, command, text, participants }) => {
     if (!text) {
       return conn.reply(m.chat, `😒 *Ingrese su petición idiota*\n😐 *Mira para que aprendas toma esto como ejemplo:* ${usedPrefix + command} como valer verga`, m, rcanal)
     }
-    await m.react('💬')
+    await m.react('🥱')
     try {
       const query = text
       const prompt = `${basePrompt}. Responde lo siguiente: ${query}`
