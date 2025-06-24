@@ -24,33 +24,37 @@ const handler = async (m, { conn, text, command }) => {
 
   // MP3 - comando play3
   if (command === 'play3') {
-    try {
-      await m.reply('🔊 Descargando audio desde Y2Mate...');
-      const res = await fetch(`https://aemt.me/downloadmp3?url=${encodeURIComponent(url)}`);
-      const json = await res.json();
+  try {
+    await m.reply('🔊 Descargando audio desde Akuari API...');
 
-      if (!json || !json.result?.url) throw new Error('No se pudo obtener el audio.');
+    const res = await fetch(`https://api.akuari.my.id/downloader/youtube2?link=${encodeURIComponent(url)}`);
+    const json = await res.json();
+    const audioUrl = json.mp3?.url;
 
-      await conn.sendMessage(m.chat, {
-        audio: { url: json.result.url },
-        mimetype: 'audio/mpeg',
-        ptt: false,
-        contextInfo: {
-          externalAdReply: {
-            title: "Sport-Bot",
-            body: video.title,
-            thumbnailUrl: video.thumbnail,
-            mediaUrl: url,
-            sourceUrl: url,
-            renderLargerThumbnail: true
-          }
+    if (!audioUrl) throw new Error('No se encontró el enlace de audio.');
+
+    await conn.sendMessage(m.chat, {
+      audio: { url: audioUrl },
+      mimetype: 'audio/mpeg',
+      ptt: false,
+      contextInfo: {
+        externalAdReply: {
+          title: 'Sport-Bot',
+          body: video.title,
+          thumbnailUrl: video.thumbnail,
+          mediaUrl: url,
+          sourceUrl: url,
+          renderLargerThumbnail: true
         }
-      }, { quoted: m });
-    } catch (e) {
-      console.error('Error MP3:', e.message);
-      return m.reply(`❌ Error al descargar el audio.`);
-    }
+      }
+    }, { quoted: m });
+
+  } catch (e) {
+    console.error('Error MP3:', e.message);
+    return m.reply(`❌ Error al descargar el audio.\n📄 ${e.message}`);
   }
+}
+
 
   // MP4 - comandos play23 o ytmp42
   if (command === 'play23' || command === 'ytmp42') {
