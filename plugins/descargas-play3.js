@@ -22,47 +22,71 @@ const handler = async (m, { conn, text, command }) => {
     caption: info
   }, { quoted: m });
 
-  // AUDIO para comando play3
+  // MP3 - comando play3
   if (command === 'play3') {
     try {
-      await m.reply('🔊 Descargando audio, espera un momento...');
-      const res = await fetch(`https://api.zenkey.my.id/api/download/ytmp3?url=${url}`);
+      await m.reply('🔊 Descargando audio desde Y2Mate...');
+      const res = await fetch(`https://aemt.me/downloadmp3?url=${encodeURIComponent(url)}`);
       const json = await res.json();
-      if (!json.status || !json.result?.url) throw 'No se pudo descargar el audio.';
+
+      if (!json || !json.result?.url) throw new Error('No se pudo obtener el audio.');
 
       await conn.sendMessage(m.chat, {
         audio: { url: json.result.url },
-        mimetype: 'audio/mpeg'
+        mimetype: 'audio/mpeg',
+        ptt: false,
+        contextInfo: {
+          externalAdReply: {
+            title: "Sport-Bot",
+            body: video.title,
+            thumbnailUrl: video.thumbnail,
+            mediaUrl: url,
+            sourceUrl: url,
+            renderLargerThumbnail: true
+          }
+        }
       }, { quoted: m });
     } catch (e) {
       console.error('Error MP3:', e.message);
-      return m.reply('⚠️ Error al descargar audio.');
+      return m.reply(`❌ Error al descargar el audio.`);
     }
   }
 
-  // VIDEO para play2 o ytmp42
-  if (command === 'play2' || command === 'ytmp42') {
+  // MP4 - comandos play23 o ytmp42
+  if (command === 'play23' || command === 'ytmp42') {
     try {
-      await m.reply('📽️ Descargando video, espera un momento...');
-      const res = await fetch(`https://api.zenkey.my.id/api/download/ytmp4?url=${url}`);
+      await m.reply('📽️ Descargando video desde Y2Mate...');
+      const res = await fetch(`https://aemt.me/downloadmp4?url=${encodeURIComponent(url)}`);
       const json = await res.json();
-      if (!json.status || !json.result?.url) throw 'No se pudo descargar el video.';
+
+      if (!json || !json.result?.url) throw new Error('No se pudo obtener el video.');
 
       await conn.sendMessage(m.chat, {
         video: { url: json.result.url },
         mimetype: 'video/mp4',
-        fileName: `${video.title}.mp4`
+        fileName: `${video.title}.mp4`,
+        contextInfo: {
+          externalAdReply: {
+            title: "Sport-Bot",
+            body: video.title,
+            thumbnailUrl: video.thumbnail,
+            mediaUrl: url,
+            sourceUrl: url,
+            renderLargerThumbnail: true
+          }
+        }
       }, { quoted: m });
     } catch (e) {
       console.error('Error MP4:', e.message);
-      return m.reply('⚠️ Error al descargar video.');
+      return m.reply(`❌ Error al descargar el video.`);
     }
   }
 }
 
 handler.command = ['play3', 'play23', 'ytmp42']
-handler.help = ['play3 <nombre>', 'play2 <nombre>', 'ytmp42 <nombre>']
+handler.help = ['play3 <nombre>', 'play23 <nombre>', 'ytmp42 <nombre>']
 handler.tags = ['downloader']
 handler.group = true
 
 export default handler
+
