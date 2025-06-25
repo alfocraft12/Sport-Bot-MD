@@ -1,6 +1,5 @@
-let handler = async (m, { conn, usedPrefix, command }) => {
-
-  let fkontak = {
+let handler = async (m, { conn }) => {
+  let fake = {
     key: {
       participants: "0@s.whatsapp.net",
       remoteJid: "status@broadcast",
@@ -9,38 +8,16 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     },
     message: {
       contactMessage: {
-        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
+        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;Sport Bot;;;\nFN:Sport Bot\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
       }
     },
     participant: "0@s.whatsapp.net"
   }
 
-  let yaemori = `let handler = async (m, { conn }) => {
   let imagen = './src/freefire/bermuda.jpeg'
+  await conn.sendFile(m.chat, imagen, 'bermuda.jpeg', '', null, false, fake)
 }
 
-${global.md}`.trim()
-
-  await delay(1000) // <-- para prevenir el rate-overlimit
-  await conn.reply(m.chat, yaemori, m, fkontak)
-}
-
-handler.help = ['mapas']
-handler.tags = ['main']
 handler.command = ['bermuda']
-handler.register = false
+handler.group = true
 export default handler
-
-const more = String.fromCharCode(8206)
-const readMore = more.repeat(4001)
-
-function clockString(ms) {
-  let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
-  let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
-  let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
-  return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-}
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
