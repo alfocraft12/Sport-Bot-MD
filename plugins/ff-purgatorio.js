@@ -14,8 +14,8 @@ let handler = async (m, { conn }) => {
     participant: "0@s.whatsapp.net"
   }
 
-  let imagen = './src/freefire/purgatorio.jpg'
-  await conn.sendFile(m.chat, imagen, 'purgatorio.jpg', '', null, false, fake)
+  let imagen = './src/freefire/purgatorio.JPG'
+  await conn.sendFile(m.chat, imagen, 'purgatorio.JPG', '', null, false, fake)
 }
 
 handler.command = ['purgatorio', 'pur']
