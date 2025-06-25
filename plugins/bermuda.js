@@ -18,6 +18,6 @@ let handler = async (m, { conn }) => {
   await conn.sendFile(m.chat, imagen, 'bermuda.jpeg', '', null, false, fake)
 }
 
-handler.command = ['bermuda']
+handler.command = ['bermuda', 'ber']
 handler.group = true
 export default handler
