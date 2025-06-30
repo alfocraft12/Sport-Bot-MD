@@ -92,8 +92,6 @@ ch4: '120363393102930979@newsletter',
 ch5: '120363393102930979@newsletter',
 }
 
-global.idchannel = '12036340211126919@newsletter'; // ← Tu ID convertido correctamente
-
 //• ↳ ◜𝑳𝑰𝑵𝑲𝑺◞ • 🌿
 global.gp4 = 'null' //Grupo Oficial De Sport-Bot 
 global.gp1 = 'null' //Grupo 
