@@ -87,9 +87,9 @@ global.fgif2 = { key: {participant: `0@s.whatsapp.net`, ...(false ? { remoteJid:
 global.ch = {
 ch1: '120363393102930979@newsletter',
 ch2: '120363393102930979@newsletter',
-ch3: '120363393102930979@newsletter',
+ch3: '120363402111269195@newsletter',
 ch4: '120363393102930979@newsletter',
-ch5: '120363393102930979@newsletter',
+ch5: '120363402111269195@newsletter',
 }
 
 //• ↳ ◜𝑳𝑰𝑵𝑲𝑺◞ • 🌿
