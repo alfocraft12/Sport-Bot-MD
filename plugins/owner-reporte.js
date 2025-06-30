@@ -13,11 +13,11 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
 💬 Mensaje:
 • ${text}`
-  ///  await conn.reply('573012482597@s.whatsapp.net', m.quoted ? teks + m.quoted.text : teks, m, { mentions: conn.parseMention(teks) })
+  ///  await conn.reply('573146171942@s.whatsapp.net', m.quoted ? teks + m.quoted.text : teks, m, { mentions: conn.parseMention(teks) })
 
   await conn.reply(global.owner[0][0] + '@s.whatsapp.net', m.quoted ? teks + m.quoted.text : teks, m, { mentions: conn.parseMention(teks) })
 
-/*await conn.sendMessage(global.idchannel, { text: m.quoted ? teks + m.quoted.text : teks, contextInfo: {
+await conn.sendMessage(global.idchannel, { text: m.quoted ? teks + m.quoted.text : teks, contextInfo: {
 externalAdReply: {
 title: "【 🔔 𝐄𝐑𝐑𝐎𝐑 🔔 】",
 body: '💤 ¡𝚄𝚗 𝚞𝚜𝚞𝚊𝚛𝚒𝚘 𝚑𝚊 𝚛𝚎𝚙𝚘𝚛𝚝𝚊𝚍𝚘 𝚞𝚗 𝚎𝚛𝚛𝚘𝚛!',
@@ -26,7 +26,7 @@ sourceUrl: redes,
 mediaType: 1,
 showAdAttribution: false,
 renderLargerThumbnail: false
-}}}, { quoted: null })*/
+}}}, { quoted: null })
 
     m.reply('⚠️ *El reporte se envío a mi creador, cualquier informe falso puede ocasionar baneo.*')
 }
