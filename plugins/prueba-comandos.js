@@ -2,13 +2,12 @@ import pkg from '@whiskeysockets/baileys';
 const {
   makeWASocket,
   useMultiFileAuthState,
-  fetchLatestBaileysVersion,
-  makeInMemoryStore
+  fetchLatestBaileysVersion
 } = pkg;
 
 import pino from 'pino';
 
-// Definición del prefijo global
+// Prefijo global para comandos
 global.prefix = /[!#\/.]/;
 
 export async function before(m) {
@@ -65,7 +64,6 @@ export async function before(m) {
 async function connectToWhatsApp() {
   const { state, saveCreds } = await useMultiFileAuthState('auth_info');
   const { version } = await fetchLatestBaileysVersion();
-  const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) });
 
   const sock = makeWASocket({
     logger: pino({ level: 'silent' }),
@@ -76,7 +74,6 @@ async function connectToWhatsApp() {
   });
 
   sock.ev.on('creds.update', saveCreds);
-  store.bind(sock.ev);
 
   sock.ev.on('messages.upsert', async (msg) => {
     const message = msg.messages[0];
