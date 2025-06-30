@@ -1,8 +1,15 @@
-import { makeWASocket, useMultiFileAuthState, fetchLatestBaileysVersion, makeInMemoryStore } from '@whiskeysockets/baileys';
+import pkg from '@whiskeysockets/baileys';
+const {
+  makeWASocket,
+  useMultiFileAuthState,
+  fetchLatestBaileysVersion,
+  makeInMemoryStore
+} = pkg;
+
 import pino from 'pino';
 
 // Definición del prefijo global
-global.prefix = /[!#\/.]/;  // Puedes definir múltiples prefijos utilizando una expresión regular
+global.prefix = /[!#\/.]/;
 
 export async function before(m) {
   if (!m.text || !global.prefix.test(m.text)) return;
@@ -55,7 +62,6 @@ export async function before(m) {
   }
 }
 
-// Inicialización y configuración del bot de WhatsApp
 async function connectToWhatsApp() {
   const { state, saveCreds } = await useMultiFileAuthState('auth_info');
   const { version } = await fetchLatestBaileysVersion();
@@ -86,4 +92,3 @@ async function connectToWhatsApp() {
 }
 
 connectToWhatsApp().catch(err => console.log('Error:', err));
-
