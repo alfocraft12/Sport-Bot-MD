@@ -1,4 +1,4 @@
-import { makeWASocket, useMultiFileAuthState, fetchLatestBaileysVersion, makeInMemoryStore } from '@whiskeysockets/baileys';
+/*import { makeWASocket, useMultiFileAuthState, fetchLatestBaileysVersion, makeInMemoryStore } from '@whiskeysockets/baileys';
 import pino from 'pino';
 
 // Definición del prefijo global
@@ -54,7 +54,7 @@ export async function before(m) {
 
   } else {
     const comando = m.text.trim().split(' ')[0];
-    await m.reply(`⚡︎ El comando *${comando}* no existe.\nPara ver la lista de comandos usa:\n» *#help*`);
+   // await m.reply(`⚡︎ El comando *${comando}* no existe.\nPara ver la lista de comandos usa:\n» *#help*`);
   }
 }
 
@@ -88,4 +88,4 @@ async function connectToWhatsApp() {
   return sock;
 }
 
-connectToWhatsApp().catch(err => console.log('Error:', err));
+//connectToWhatsApp().catch(err => console.log('Error:', err));*/
