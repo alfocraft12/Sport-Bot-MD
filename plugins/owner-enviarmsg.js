@@ -1,9 +1,30 @@
-const idgroup = "120363403633171304@g.us";
-const reports = [];
-let ticketCounter = 1; // Empieza desde el ticket #1
+import fs from 'fs'
+const idgroup = "120363403633171304@g.us" // Tu grupo de reportes
+const reportes = []
+const ticketFile = './media/database/tickets.json'
 
+// Asegura que exista la carpeta
+if (!fs.existsSync('./media/database')) fs.mkdirSync('./media/database', { recursive: true })
+
+// Leer ticket actual
+function getTicketCounter() {
+  try {
+    if (!fs.existsSync(ticketFile)) fs.writeFileSync(ticketFile, JSON.stringify({ counter: 1 }, null, 2))
+    const data = JSON.parse(fs.readFileSync(ticketFile))
+    return data.counter || 1
+  } catch {
+    return 1
+  }
+}
+
+// Guardar nuevo valor
+function updateTicketCounter(nuevoValor) {
+  fs.writeFileSync(ticketFile, JSON.stringify({ counter: nuevoValor }, null, 2))
+}
+
+// Formato de fecha
 function formatDate() {
-  const now = new Date();
+  const now = new Date()
   return now.toLocaleString('es-CO', {
     timeZone: 'America/Bogota',
     hour12: true,
@@ -12,78 +33,77 @@ function formatDate() {
     year: 'numeric',
     hour: '2-digit',
     minute: '2-digit'
-  });
+  })
 }
 
 let handler = async (m, { conn, command, args }) => {
   if (command === 'test') {
-    const contenido = args.join(' ');
+    const contenido = args.join(' ')
+    if (!contenido) return conn.reply(m.chat, `🙌 Por favor, proporciona un reporte.`, m)
 
-    if (!contenido) {
-      return conn.reply(m.chat, `🙌 Por favor, proporciona un reporte.`, m);
-    }
+    const senderName = await conn.getName(m.sender)
+    const ticketNum = getTicketCounter()
+    const ticketId = `#${ticketNum.toString().padStart(4, '0')}`
 
-    const senderName = await conn.getName(m.sender);
-    const ticketId = `#${ticketCounter.toString().padStart(4, '0')}`; // Ej: #0001
-
-    const reportText = `🆔 *Ticket:* ${ticketId}\n👤 *Usuario:* ${senderName || 'Anónimo'}\n📝 *Reporte:* ${contenido || 'Sin descripción'}\n📱 *Número:* @${m.sender.split('@')[0]}`;
+    const reportText = `🆔 *Ticket:* ${ticketId}\n👤 *Usuario:* ${senderName}\n📝 *Reporte:* ${contenido}\n📱 *Número:* @${m.sender.split('@')[0]}`
 
     const msg = await conn.sendMessage(idgroup, {
       text: `✿ Nuevo reporte:\n\n${reportText}\n━━━━━━━━━━━━━━\n🕒 *Enviado:* ${formatDate()}`,
       mentions: [m.sender]
-    });
+    })
 
-    reports.push({
+    reportes.push({
       id: msg.key.id,
       user: m.sender,
       contenido,
       nombre: senderName,
       ticket: ticketId,
       timestamp: Date.now()
-    });
+    })
 
-    ticketCounter++;
+    updateTicketCounter(ticketNum + 1)
 
-    await conn.reply(m.chat, `🙌 Tu reporte fue enviado al grupo con el ${ticketId}.`, m);
+    // Enviar copia del mismo reporte al usuario
+    await conn.sendMessage(m.sender, {
+      text: `✿ Nuevo reporte:\n\n${reportText}\n━━━━━━━━━━━━━━\n🕒 *Enviado:* ${formatDate()}`,
+      mentions: [m.sender]
+    })
 
   } else if (command === 'responder') {
-    if (!m.quoted) {
-      return conn.reply(m.chat, `❌ Debes citar el mensaje del reporte enviado por el bot.`, m);
-    }
+    if (!m.quoted) return conn.reply(m.chat, `❌ Debes citar el mensaje del reporte enviado por el bot.`, m)
 
-    const response = args.join(' ');
+    const respuesta = args.join(' ')
+    if (!respuesta) return conn.reply(m.chat, `🙏 Por favor, proporciona una respuesta.`, m)
 
-    if (!response) {
-      return conn.reply(m.chat, `🙏 Por favor, proporciona una respuesta.`, m);
-    }
-
-    const textoCitado = m.quoted?.text || "";
-    const report = reports.find(r =>
+    const textoCitado = m.quoted.text || ""
+    const reporte = reportes.find(r =>
       textoCitado.includes(r.contenido) &&
       textoCitado.includes(r.nombre)
-    );
+    )
 
-    if (!report) {
-      return conn.reply(m.chat, `❌ No se encontró el reporte citado. Asegúrate de citar el mensaje correcto del bot.`, m);
-    }
+    if (!reporte) return conn.reply(m.chat, `❌ No se encontró el reporte citado.`, m)
 
-    const mensajeFinal = `❗ *Respuesta enviada:*\n🆔 *Ticket:* ${report.ticket}\n━━━━━━━━━━━━━━\n🗨️ *Respuesta:* ${response}\n📋 *Reporte original:* ${report.contenido}\n👤 *Respondido por:* @${m.sender.split('@')[0]}\n━━━━━━━━━━━━━━\n🕒 *Respondido:* ${formatDate()}`;
+    const mensajeFinal = `❗ *Respuesta enviada:*\n🆔 *Ticket:* ${reporte.ticket}\n━━━━━━━━━━━━━━\n🗨️ *Respuesta:* ${respuesta}\n📋 *Reporte original:* ${reporte.contenido}\n👤 *Respondido por:* @${m.sender.split('@')[0]}\n━━━━━━━━━━━━━━\n🕒 *Respondido:* ${formatDate()}`
 
-    await conn.sendMessage(report.user, { text: mensajeFinal });
+    await conn.sendMessage(reporte.user, {
+      text: mensajeFinal,
+      mentions: [m.sender]
+    })
 
     await conn.sendMessage(idgroup, {
       text: mensajeFinal,
       mentions: [m.sender]
-    });
+    })
 
-    const index = reports.indexOf(report);
-    if (index > -1) reports.splice(index, 1);
+    // Eliminar de memoria para evitar duplicados
+    const index = reportes.indexOf(reporte)
+    if (index > -1) reportes.splice(index, 1)
   }
-};
+}
 
-handler.command = ['test', 'responder'];
-handler.tags = ['tools'];
-handler.help = ['test <mensaje>', 'responder <respuesta> (citando el reporte)'];
-handler.rowner = true;
+handler.command = ['test', 'responder']
+handler.tags = ['tools']
+handler.help = ['test <mensaje>', 'responder <respuesta> (citando el reporte)']
+handler.rowner = true
 
-export default handler;
+export default handler
