@@ -1,5 +1,5 @@
 import fs from 'fs'
-const idgroup = "120363403633171304@g.us" // Tu grupo de reportes
+const idgroup = "120363403633171304@g.us"
 const reportes = []
 const ticketFile = './media/database/tickets.json'
 
@@ -63,12 +63,6 @@ let handler = async (m, { conn, command, args }) => {
 
     updateTicketCounter(ticketNum + 1)
 
-    // Enviar copia del mismo reporte al usuario
-    await conn.sendMessage(m.sender, {
-      text: `✿ Nuevo reporte:\n\n${reportText}\n━━━━━━━━━━━━━━\n🕒 *Enviado:* ${formatDate()}`,
-      mentions: [m.sender]
-    })
-
   } else if (command === 'responder') {
     if (!m.quoted) return conn.reply(m.chat, `❌ Debes citar el mensaje del reporte enviado por el bot.`, m)
 
@@ -95,7 +89,6 @@ let handler = async (m, { conn, command, args }) => {
       mentions: [m.sender]
     })
 
-    // Eliminar de memoria para evitar duplicados
     const index = reportes.indexOf(reporte)
     if (index > -1) reportes.splice(index, 1)
   }
