@@ -1,5 +1,5 @@
 const idgroup = "120363403633171304@g.us"; // ID de tu grupo
-const reports = {};
+const reports = []; // Ahora es un array, no un objeto
 
 let handler = async (m, { conn, command, args }) => {
   if (command === 'test') {
@@ -18,32 +18,38 @@ let handler = async (m, { conn, command, args }) => {
       mentions: [m.sender]
     });
 
-    // Guardar el ID del mensaje para poder responder después
-    reports[msg.key.id] = {
+    // Guardar como objeto con más datos
+    reports.push({
+      id: msg.key.id,
       user: m.sender,
-      contenido
-    };
+      contenido,
+      nombre: senderName,
+      timestamp: Date.now()
+    });
 
     // Confirmación al usuario
     await conn.reply(m.chat, `🙌 Tu reporte ha sido enviado al grupo para revisión.`, m);
 
   } else if (command === 'responder') {
-    const quotedId = m?.quoted?.key?.id;
-
-    if (!quotedId) {
-      return conn.reply(m.chat, `❌ Debes *citar* el mensaje del reporte enviado por el bot.`, m);
-    }
-
-    const report = reports[quotedId];
-
-    if (!report) {
-      return conn.reply(m.chat, `❌ No se encontró el reporte para responder. Asegúrate de responder al *mensaje correcto del bot*.`, m);
+    if (!m.quoted) {
+      return conn.reply(m.chat, `❌ Debes citar el mensaje del reporte enviado por el bot.`, m);
     }
 
     const response = args.join(' ');
 
     if (!response) {
       return conn.reply(m.chat, `🙏 Por favor, proporciona una respuesta.`, m);
+    }
+
+    // Buscar el reporte relacionado
+    const textoCitado = m.quoted?.text || "";
+    const report = reports.find(r =>
+      textoCitado.includes(r.contenido) &&
+      textoCitado.includes(r.nombre)
+    );
+
+    if (!report) {
+      return conn.reply(m.chat, `❌ No se encontró el reporte citado. Asegúrate de citar el mensaje correcto del bot.`, m);
     }
 
     // Enviar respuesta al usuario original
@@ -57,8 +63,9 @@ let handler = async (m, { conn, command, args }) => {
       mentions: [m.sender]
     });
 
-    // Eliminar de memoria si no quieres dobles respuestas
-    delete reports[quotedId];
+    // Eliminar el reporte ya respondido
+    const index = reports.indexOf(report);
+    if (index > -1) reports.splice(index, 1);
   }
 };
 
