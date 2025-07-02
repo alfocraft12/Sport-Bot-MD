@@ -45,7 +45,14 @@ let handler = async (m, { conn, command, args }) => {
     const ticketNum = getTicketCounter()
     const ticketId = `#${ticketNum.toString().padStart(4, '0')}`
 
-    const reportText = `🆔 *Ticket:* ${ticketId}\n👤 *Usuario:* ${senderName}\n📝 *Reporte:* ${contenido}\n📱 *Número:* @${m.sender.split('@')[0]}`
+    // Detectar si viene de grupo o interno
+    let origen = 'Interno'
+    if (m.isGroup) {
+      const metadata = await conn.groupMetadata(m.chat)
+      origen = metadata.subject || 'Grupo'
+    }
+
+    const reportText = `🆔 *Ticket:* ${ticketId}\n👤 *Usuario:* ${senderName}\n📍 *Origen:* ${origen}\n📝 *Reporte:* ${contenido}\n📱 *Número:* @${m.sender.split('@')[0]}`
 
     const msg = await conn.sendMessage(idgroup, {
       text: `✿ Nuevo reporte:\n\n${reportText}\n━━━━━━━━━━━━━━\n🕒 *Enviado:* ${formatDate()}`,
@@ -58,14 +65,16 @@ let handler = async (m, { conn, command, args }) => {
       contenido,
       nombre: senderName,
       ticket: ticketId,
+      origen,
       timestamp: Date.now()
     })
 
     updateTicketCounter(ticketNum + 1)
 
-    // ✅ Confirmación para el usuario
-    await conn.sendMessage(m.sender, {
-      text: `🙌 *Tu reporte fue enviado correctamente.*\n🆔 *Ticket:* ${ticketId}\n🕒 *Enviado:* ${formatDate()}`
+    // Confirmación para el usuario en el mismo chat
+    await conn.sendMessage(m.chat, {
+      text: `🙌 *Tu reporte fue enviado correctamente.*\n🆔 *Ticket:* ${ticketId}\n📍 *Origen:* ${origen}\n🕒 *Enviado:* ${formatDate()}`,
+      mentions: [m.sender]
     })
 
   } else if (command === 'responder') {
