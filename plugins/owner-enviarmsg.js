@@ -63,6 +63,11 @@ let handler = async (m, { conn, command, args }) => {
 
     updateTicketCounter(ticketNum + 1)
 
+    // ✅ Confirmación para el usuario
+    await conn.sendMessage(m.sender, {
+      text: `🙌 *Tu reporte fue enviado correctamente.*\n🆔 *Ticket:* ${ticketId}\n🕒 *Enviado:* ${formatDate()}`
+    })
+
   } else if (command === 'responder') {
     if (!m.quoted) return conn.reply(m.chat, `❌ Debes citar el mensaje del reporte enviado por el bot.`, m)
 
