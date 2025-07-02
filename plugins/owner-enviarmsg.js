@@ -111,6 +111,5 @@ let handler = async (m, { conn, command, args }) => {
 handler.command = ['test', 'responder']
 handler.tags = ['tools']
 handler.help = ['test <mensaje>', 'responder <respuesta> (citando el reporte)']
-handler.rowner = true
 
 export default handler
