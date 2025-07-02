@@ -1,4 +1,10 @@
-export async function before(m, { conn }) {
+import { makeWASocket, useMultiFileAuthState, fetchLatestBaileysVersion, makeInMemoryStore } from '@whiskeysockets/baileys';
+import pino from 'pino';
+
+// Definición del prefijo global
+global.prefix = /[!#\/.]/;  // Puedes definir múltiples prefijos usando expresión regular
+
+export async function before(m) {
   if (!m.text || !global.prefix.test(m.text)) return;
 
   let perfil = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://qu.ax/QGAVS.jpg');
@@ -17,12 +23,9 @@ export async function before(m, { conn }) {
   if (validCommand(command, global.plugins)) {
     let chat = global.db.data.chats[m.chat];
     let user = global.db.data.users[m.sender];
-    if (chat.isBanned) return;
-
+    if (chat?.isBanned) return;
     if (!user.commands) user.commands = 0;
     user.commands += 1;
-
-    const grupoNotificacion = "120363403633171304@g.us"; // ✅ Grupo donde se enviará la notificación
 
     let chtxt = `
 👤 *Usuario* » ${m.pushName || 'Incógnito'}
@@ -31,7 +34,9 @@ export async function before(m, { conn }) {
 > Recuerda que si haces mucho spam de comando puedes ser baneado. 🍁💫
     `.trim();
 
-    await conn.sendMessage(grupoNotificacion, {
+    const idgroup = "120363403633171304@g.us"; // 💬 GRUPO en lugar de canal
+
+    await conn.sendMessage(idgroup, {
       text: chtxt,
       contextInfo: {
         externalAdReply: {
