@@ -1,5 +1,19 @@
-const idgroup = "120363403633171304@g.us"; // ID de tu grupo
-const reports = []; // Ahora es un array, no un objeto
+const idgroup = "120363403633171304@g.us";
+const reports = [];
+let ticketCounter = 1; // Empieza desde el ticket #1
+
+function formatDate() {
+  const now = new Date();
+  return now.toLocaleString('es-CO', {
+    timeZone: 'America/Bogota',
+    hour12: true,
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
 
 let handler = async (m, { conn, command, args }) => {
   if (command === 'test') {
@@ -10,25 +24,27 @@ let handler = async (m, { conn, command, args }) => {
     }
 
     const senderName = await conn.getName(m.sender);
-    const reportText = `👤 *Usuario:* ${senderName || 'Anónimo'}\n📝 *Reporte:* ${contenido || 'Sin descripción'}\n📱 *Número:* @${m.sender.split('@')[0]}`;
+    const ticketId = `#${ticketCounter.toString().padStart(4, '0')}`; // Ej: #0001
 
-    // Enviar el reporte al grupo con mención
+    const reportText = `🆔 *Ticket:* ${ticketId}\n👤 *Usuario:* ${senderName || 'Anónimo'}\n📝 *Reporte:* ${contenido || 'Sin descripción'}\n📱 *Número:* @${m.sender.split('@')[0]}`;
+
     const msg = await conn.sendMessage(idgroup, {
-      text: `✿ Nuevo reporte:\n\n${reportText}`,
+      text: `✿ Nuevo reporte:\n\n${reportText}\n━━━━━━━━━━━━━━\n🕒 *Enviado:* ${formatDate()}`,
       mentions: [m.sender]
     });
 
-    // Guardar como objeto con más datos
     reports.push({
       id: msg.key.id,
       user: m.sender,
       contenido,
       nombre: senderName,
+      ticket: ticketId,
       timestamp: Date.now()
     });
 
-    // Confirmación al usuario
-    await conn.reply(m.chat, `🙌 Tu reporte ha sido enviado al grupo para revisión.`, m);
+    ticketCounter++;
+
+    await conn.reply(m.chat, `🙌 Tu reporte fue enviado al grupo con el ${ticketId}.`, m);
 
   } else if (command === 'responder') {
     if (!m.quoted) {
@@ -41,7 +57,6 @@ let handler = async (m, { conn, command, args }) => {
       return conn.reply(m.chat, `🙏 Por favor, proporciona una respuesta.`, m);
     }
 
-    // Buscar el reporte relacionado
     const textoCitado = m.quoted?.text || "";
     const report = reports.find(r =>
       textoCitado.includes(r.contenido) &&
@@ -52,18 +67,15 @@ let handler = async (m, { conn, command, args }) => {
       return conn.reply(m.chat, `❌ No se encontró el reporte citado. Asegúrate de citar el mensaje correcto del bot.`, m);
     }
 
-    // Enviar respuesta al usuario original
-    await conn.sendMessage(report.user, {
-      text: `📣 Respuesta a tu reporte:\n\n${response}`
-    });
+    const mensajeFinal = `❗ *Respuesta enviada:*\n🆔 *Ticket:* ${report.ticket}\n━━━━━━━━━━━━━━\n🗨️ *Respuesta:* ${response}\n📋 *Reporte original:* ${report.contenido}\n👤 *Respondido por:* @${m.sender.split('@')[0]}\n━━━━━━━━━━━━━━\n🕒 *Respondido:* ${formatDate()}`;
 
-    // Confirmación en el grupo
+    await conn.sendMessage(report.user, { text: mensajeFinal });
+
     await conn.sendMessage(idgroup, {
-      text: `❗ Respuesta enviada:\n\n🗨️ *Respuesta:* ${response}\n📋 *Reporte original:* ${report.contenido}\n👤 *Respondido por:* @${m.sender.split('@')[0]}`,
+      text: mensajeFinal,
       mentions: [m.sender]
     });
 
-    // Eliminar el reporte ya respondido
     const index = reports.indexOf(report);
     if (index > -1) reports.splice(index, 1);
   }
