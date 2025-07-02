@@ -1,4 +1,4 @@
-const idgroup = "120363403633171304@g.us"; // Reemplaza con el ID real de tu grupo
+const idgroup = "120363403633171304@g.us"; // ID de tu grupo
 const reports = {};
 
 let handler = async (m, { conn, command, args }) => {
@@ -18,7 +18,7 @@ let handler = async (m, { conn, command, args }) => {
       mentions: [m.sender]
     });
 
-    // Guardar el ID para futuras respuestas
+    // Guardar el ID del mensaje para poder responder después
     reports[msg.key.id] = {
       user: m.sender,
       contenido
@@ -28,8 +28,16 @@ let handler = async (m, { conn, command, args }) => {
     await conn.reply(m.chat, `🙌 Tu reporte ha sido enviado al grupo para revisión.`, m);
 
   } else if (command === 'responder') {
-    if (!m.quoted || !reports[m.quoted.key.id]) {
-      return conn.reply(m.chat, `❌ No se encontró el reporte para responder.`, m);
+    const quotedId = m?.quoted?.key?.id;
+
+    if (!quotedId) {
+      return conn.reply(m.chat, `❌ Debes *citar* el mensaje del reporte enviado por el bot.`, m);
+    }
+
+    const report = reports[quotedId];
+
+    if (!report) {
+      return conn.reply(m.chat, `❌ No se encontró el reporte para responder. Asegúrate de responder al *mensaje correcto del bot*.`, m);
     }
 
     const response = args.join(' ');
@@ -37,8 +45,6 @@ let handler = async (m, { conn, command, args }) => {
     if (!response) {
       return conn.reply(m.chat, `🙏 Por favor, proporciona una respuesta.`, m);
     }
-
-    const report = reports[m.quoted.key.id];
 
     // Enviar respuesta al usuario original
     await conn.sendMessage(report.user, {
@@ -52,7 +58,7 @@ let handler = async (m, { conn, command, args }) => {
     });
 
     // Eliminar de memoria si no quieres dobles respuestas
-    delete reports[m.quoted.key.id];
+    delete reports[quotedId];
   }
 };
 
