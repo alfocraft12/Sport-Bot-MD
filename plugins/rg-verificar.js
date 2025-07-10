@@ -40,7 +40,7 @@ const handler = async function (m, { conn, text, usedPrefix, command }) {
     throw `🌴 Hola amigo, ya estás registrado en nuestra base de datos.`
 
   if (!Reg.test(text))
-    throw `⛔ Regístrate bien.\nEjemplo:\n*${usedPrefix}reg miguel.23*`
+    throw `⛔ Regístrate bien.\nEjemplo:\n*${usedPrefix}reg DcA alfo.16*`
 
   let [_, name, splitter, age] = text.match(Reg)
   if (!name) throw '❌ El nombre no puede estar vacío.'
