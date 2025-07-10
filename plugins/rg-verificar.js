@@ -76,7 +76,7 @@ const handler = async function (m, { conn, text, usedPrefix, command }) {
 ✅ ¡Ya estás registrado en nuestra comunidad!
 
 📢 Canal oficial: 
-https://whatsapp.com/channel/0029Vawz6Y91SWsyLezeAb0f
+https://whatsapp.com/channel/0029Vb3yM0T2v1ItNDrGIY3v
 `
 
   await conn.sendFile(m.chat, pp, 'perfil.jpg', caption, m)
