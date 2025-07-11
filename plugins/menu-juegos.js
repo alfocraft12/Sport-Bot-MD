@@ -108,9 +108,8 @@ const document = doc[Math.floor(Math.random() * doc.length)];
   }
 };
 handler.command = ['juegosmenu','games','juegos','menujuegos']
-handler.register = false
+handler.register = true
 handler.exp = 50;
-handler.group = true
 handler.fail = null;
 export default handler;
 function clockString(ms) {
