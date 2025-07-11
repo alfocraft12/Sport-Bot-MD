@@ -50,7 +50,7 @@ let d4 = 'application/pdf'
 let d5 = 'application/vnd.android.package-archive'
 let d6 = 'application/zip'
 let td = `${pickRandom([d1,d2,d3,d4,d5,d6])}`
-let fkontak = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: `status@broadcast` } : {}) }, message: { 'contactMessage': { 'displayName': wm, 'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:XL;${wm},;;;\nFN:${wm},\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabell:Ponsel\nEND:VCARD`, 'jpegThumbnail': fs.readFileSync('./Menu.jpg'), thumbnail: fs.readFileSync('./Menu.jpg'),sendEphemeral: true}}}
+let fkontak = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: `status@broadcast` } : {}) }, message: { 'contactMessage': { 'displayName': wm, 'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:XL;${wm},;;;\nFN:${wm},\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabell:Ponsel\nEND:VCARD`, 'jpegThumbnail': fs.readFileSync('src/menu_en.png'), thumbnail: fs.readFileSync('src/menu_en.png'),sendEphemeral: true}}}
    let txt = '╭─╮︹︹⊹︹︹⊹︹︹⊹︹︹╭─╮\n    ⚘݄𖠵⃕⁖𖥔͢Menu ꪶ͢𝑩𝒐𝒕⋆᭄͙̈\n╚▭࣪▬ִ▭࣪▬ִ▭࣪▬ִ▭࣪▬ִ▭࣪▬ִ▭࣪▬▭╝'
     let interactiveMessage = {
         header: { title: '> 𝑩𝒊𝒆𝒏𝒗𝒆𝒏𝒊𝒅𝒐 𝒂𝒍 𝑴𝑬𝑵𝑼-𝑳𝑰𝑺𝑻𝑨                                      𝐇𝐮ⷡ𝐓ⷪ𝐚ⷮ𝐨-𝐌𝐃󠁂󠀧󠁂🈀' },
