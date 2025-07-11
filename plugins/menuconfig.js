@@ -308,12 +308,7 @@ EN QUE PUEDO SERVIRTE!! ”
 │  👑◦ .simsimi
 ╰──⚔️`
 
-  await conn.sendMessage(m.chat, {
-    image: { url: 'https://telegra.ph/file/abdc40c066734d54b3ff3.jpg' },
-    caption: texto,
-    mimetype: 'image/jpeg',
-    viewOnce: false
-  }, { quoted: m })
+  await conn.sendMessage(m.chat, { text: texto }, { quoted: m })
 
   global.db.data.users[m.sender].lastcofre = new Date * 1
 }
