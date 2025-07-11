@@ -83,9 +83,8 @@ const document = doc[Math.floor(Math.random() * doc.length)];
   }
 };
 handler.command = ['animesmenu','menuanimes'];
-handler.register = false
+handler.register = true
 handler.exp = 50;
-handler.group = true
 handler.fail = null;
 export default handler;
 function clockString(ms) {
