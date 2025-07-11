@@ -51,7 +51,7 @@ const defaultMenu = {
 
 ╔━━━━━ *⊱𝐈𝐍𝐅𝐎 - 𝐁𝐎𝐓⊰*
 ✦  👤 *Cliente:* %name
-✦  🔱 *Modo:* Privado
+✦  🔱 *Modo:* Público
 ✧  ✨ *Baileys:* Multi Device
 ✦  🪐 *Tiempo Activo:* %muptime
 ✧  💫 *Usuarios:* %totalreg 
