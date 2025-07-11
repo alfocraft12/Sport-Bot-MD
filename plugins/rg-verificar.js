@@ -8,6 +8,10 @@ const handler = async function (m, { conn, text, usedPrefix, command }) {
   const user = global.db.data.users[m.sender]
   const name2 = conn.getName(m.sender)
 
+  // Validar si ya está registrado — esto va primero
+  if (user.registered === true)
+    throw `🌴 Hola amigo, ya estás registrado en nuestra base de datos.`
+
   // Obtener país del usuario desde la API de Delirius
   let delirius = await axios.get(`https://delirius-apiofc.vercel.app/tools/country?text=${PhoneNumber('+' + m.sender.replace('@s.whatsapp.net', '')).getNumber('international')}`)
   let paisdata = delirius?.data?.result
@@ -35,9 +39,6 @@ const handler = async function (m, { conn, text, usedPrefix, command }) {
   let pp = await conn.profilePictureUrl(m.sender, 'image').catch(_ =>
     'https://cdn.donmai.us/original/31/6d/__hu_tao_genshin_impact_drawn_by_pioko__316d40e84fd8b32cb4cac320728a3a10.jpg'
   )
-
-  if (user.registered === true)
-    throw `🌴 Hola amigo, ya estás registrado en nuestra base de datos.`
 
   if (!Reg.test(text))
     throw `⛔ Regístrate bien.\nEjemplo:\n*${usedPrefix}reg DcA alfo.16*`
