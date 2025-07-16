@@ -9,7 +9,7 @@ const handler = async (m, { text, usedPrefix, command }) => {
     await m.react('🕒')
     conn.sendPresenceUpdate('composing', m.chat)
 
-    const url = `https://api.akuari.my.id/ai/bard?chat=${encodeURIComponent(text)}`
+    const url = `https://vihangayt.me/tools/chatgpt?q=${encodeURIComponent(text)}`
     const res = await fetch(url)
 
     const contentType = res.headers.get('content-type') || ''
@@ -21,17 +21,17 @@ const handler = async (m, { text, usedPrefix, command }) => {
 
     const json = await res.json()
 
-    if (!json.respon) {
-      throw new Error('❌ No se recibió "respon" desde la API.')
+    if (!json.data) {
+      throw new Error('❌ No se recibió respuesta desde la API.')
     }
 
-    await conn.reply(m.chat, json.respon.trim(), m, rcanal)
+    await conn.reply(m.chat, json.data.trim(), m, rcanal)
     await m.react('✅')
 
   } catch (err) {
     await m.react('✖️')
     console.error(err)
-    return conn.reply(m.chat, '☢️ *Ocurrió un fallo al consultar Bard.*', m, rcanal)
+    return conn.reply(m.chat, '☢️ *Ocurrió un fallo al consultar la IA.*', m, rcanal)
   }
 }
 
