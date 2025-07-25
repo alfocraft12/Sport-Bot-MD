@@ -401,7 +401,7 @@ Bienvenido ${userTag} 👋🏻, este es el menu de comandos que tengo disponible
 
 handler.help = ['requisitos']
 handler.tags = ['grupo']
-handler.command = ['requisitos', 'gdc', 'guerra de clanes']
+handler.command = ['comandos', 'comands']
 
 handler.group = true
 handler.admin = true
