@@ -2,7 +2,13 @@ import { promises as fs } from 'fs'
 import path from 'path'
 
 var handler = async (m, { conn }) => {
+  const userTag = '@' + m.sender.split('@')[0] // 👈 Mencionamos al usuario por tag
+
   const mensaje = `
+Bienvenido ${userTag} 👋🏻, este es el menu de comandos que tengo disponible hasta el momento, espero te agrade 😍
+
+
+
 〔 🏆Sport-Bot-MD 🏆〕
 
 ╭━〔 Menús 〕⬣
@@ -388,7 +394,8 @@ var handler = async (m, { conn }) => {
 
   await conn.sendMessage(m.chat, {
     image: buffer,
-    caption: mensaje
+    caption: mensaje,
+    mentions: [m.sender] // 👈 Esto permite que el usuario sea mencionado correctamente
   }, { quoted: m })
 }
 
