@@ -389,7 +389,7 @@ Bienvenido ${userTag} 👋🏻, este es el menu de comandos que tengo disponible
   `.trim()
 
   // Ruta relativa al archivo desde el mismo nivel del handler
-  const imgPath = path.join('./src', 'guerra-de-clanes.jpeg')
+  const imgPath = path.join('./src', 'menu-bot.jpg')
   const buffer = await fs.readFile(imgPath)
 
   await conn.sendMessage(m.chat, {
