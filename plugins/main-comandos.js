@@ -393,7 +393,6 @@ Bienvenido ${userTag} 👋🏻, este es el menu de comandos que tengo disponible
   const buffer = await fs.readFile(imgPath)
 
   await conn.sendMessage(m.chat, {
-await conn.reply(m.chat, response, m, fake)
     image: buffer,
     caption: mensaje,
     mentions: [m.sender] // 👈 Esto permite que el usuario sea mencionado correctamente
