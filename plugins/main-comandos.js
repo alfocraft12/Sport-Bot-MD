@@ -399,11 +399,12 @@ Bienvenido ${userTag} 👋🏻, este es el menu de comandos que tengo disponible
   }, { quoted: m })
 }
 
-handler.help = ['requisitos']
+handler.help = ['menu']
 handler.tags = ['grupo']
-handler.command = ['comandos', 'comands']
+handler.command = ['comandos', 'comands', 'menu', 'menuu','menu2']
 
-handler.group = true
+handler.group = false
+handler.register = true
 handler.admin = true
-
+handler.register = true
 export default handler
