@@ -1,7 +1,7 @@
 {
-"name":"Sport-Bot-MD",
-"version":"V2",
-"description": "creaor de bombas nucleares",
+"name":"HuTao-Proyect",
+"version":"V2.3",
+"description": "la directora de la funeraria el caminó",
 "main": "index.js",
 "type": "module",
 "directories":{
@@ -19,7 +19,7 @@
 "eslint": "eslint .",
 "eslintfix": "eslint --fix ."
 },
-"homepage": "https://github.com/alfocraft12/Sport-Bot-MD",
+"homepage": "https://github.com/CheirZ/HuTao-Proyect",
 "author": {
 "name": "Ximiguelon" },
 "repository": {
@@ -28,7 +28,7 @@
 "bugs": { "url": "https://github.com/CheirZ/HuTao-Proyect/issues" },
 "license": "MIT-License",
 "dependencies": {
-"@whiskeysockets/baileys": "github:ds6/meta",
+"@whiskeysockets/baileys": "^6.7.18",
 "@adiwajshing/keyed-db": "^0.2.4",
 "@bochilteam/scraper": "^4.2.4",
 "@bochilteam/scraper-sosmed": "^1.0.5",
