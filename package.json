@@ -1,7 +1,7 @@
 {
-"name":"HuTao-Proyect",
+"name":"Sport-Bot-MD",
 "version":"V2",
-"description": "la directora de la funeraria el caminó",
+"description": "creaor de bombas nucleares",
 "main": "index.js",
 "type": "module",
 "directories":{
@@ -19,7 +19,7 @@
 "eslint": "eslint .",
 "eslintfix": "eslint --fix ."
 },
-"homepage": "https://github.com/CheirZ/HuTao-Proyect",
+"homepage": "https://github.com/alfocraft12/Sport-Bot-MD",
 "author": {
 "name": "Ximiguelon" },
 "repository": {
