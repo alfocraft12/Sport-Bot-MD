@@ -405,6 +405,6 @@ handler.command = ['comandos', 'comands', 'menu', 'menuu','menu2']
 
 handler.group = false
 handler.register = true
-handler.admin = true
+handler.admin = false
 handler.register = true
 export default handler
