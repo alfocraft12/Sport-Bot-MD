@@ -43,7 +43,7 @@ _Un jugador llega a Booyah con 5 kills_
 
 *☠Kills:* 20 
 ----------------------------
-```12 + 20 = 32```
+> 12 + 20 = 32
 ----------------------------
 
 🏆Con esto el jugador obtiene un total de *32 puntos.*
