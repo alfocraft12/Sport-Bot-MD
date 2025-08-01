@@ -41,7 +41,7 @@ _Un jugador llega a Booyah con 5 kills_
 
 *🎖TOP 1:* 12 pts
 
-*☠Kills:* 20 
+*☠Kills:* 20 pts
 ----------------------------
 > 12 + 20 = 32
 ----------------------------
