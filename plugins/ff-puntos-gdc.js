@@ -54,7 +54,7 @@ _Es decir:_
 
 > 🔺Si la menor partida del jugador es un booyah con 4 kills, la siguiente partida tiene que ser de 1 booyah 5 kills, y así entre los tops.🔻
 
-`Es todo 😊`
+Es todo 😊
 
 ${global.md}`.trim()
 await conn.reply(m.chat, yaemori, m, fake)
