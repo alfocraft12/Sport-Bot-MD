@@ -32,6 +32,8 @@ Bienvenido ${userTag} 👋🏻, este es el menu de comandos que tengo disponible
 ┃🍬➺ .reglascrim
 ┃🍬➺ .reglasclk
 ┃🍬➺ .gdc
+┃🍬➺ .puntosgdc
+┃🍬➺ .gdcpuntos
 ┃🍬➺ .Ficha / jugador (inhabilitado)
 ┃🍬➺ .bermuda| ver
 ┃🍬➺ .kalahari| kal
