@@ -1,47 +1,38 @@
 // plugins/sticker-brat.js
-import { createCanvas } from 'canvas';
-import { Sticker, StickerTypes } from 'wa-sticker-formatter';
+import { sticker } from '../lib/sticker.js'
+import axios from 'axios'
 
-let handler = async (m, { text, conn, command }) => {
-  if (!text) {
-    return m.reply(`✳️ Usa el comando así:\n.${command} texto del sticker\n\nEjemplo:\n.${command} no me hables, tonto >:c`);
+const handler = async (m, { conn, args, usedPrefix, command }) => {
+  let text
+
+  if (args.length >= 1) {
+    text = args.join(' ')
+  } else if (m.quoted && m.quoted.text) {
+    text = m.quoted.text
+  } else {
+    return conn.reply(m.chat, `✳️ Usa el comando así:\n${usedPrefix + command} no me hables >:c`, m)
   }
 
-  const canvas = createCanvas(512, 512);
-  const ctx = canvas.getContext('2d');
+  if (text.length > 60) return conn.reply(m.chat, '💬 El texto no puede tener más de 60 caracteres.', m)
 
-  // Fondo brat rosado
-  ctx.fillStyle = '#ffc0cb';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Generar imagen tipo brat con API personalizada (aquí usamos un fondo rosa básico)
+  const apiURL = `https://api.popcat.xyz/sticker?text=${encodeURIComponent(text)}&color=ffc0cb&background=1`
 
-  // Corazoncitos decorativos
-  ctx.font = '30px Arial';
-  ctx.fillStyle = '#ff69b4';
-  ctx.fillText('💕', 30, 50);
-  ctx.fillText('💗', 420, 80);
-  ctx.fillText('💖', 200, 500);
+  try {
+    const response = await axios.get(apiURL, { responseType: 'arraybuffer' })
+    const buffer = Buffer.from(response.data)
 
-  // Texto principal
-  ctx.font = 'bold 34px Comic Sans MS';
-  ctx.fillStyle = '#8b008b';
-  ctx.textAlign = 'center';
-  ctx.fillText(text.slice(0, 40), canvas.width / 2, canvas.height / 2);
+    const stiker = await sticker(buffer, false, global.packname, global.author)
+    if (stiker) return conn.sendFile(m.chat, stiker, 'brat.webp', '', m)
+    else throw '⚠️ No se pudo generar el sticker.'
+  } catch (e) {
+    console.error(e)
+    return conn.reply(m.chat, '❌ Ocurrió un error al generar el sticker.', m)
+  }
+}
 
-  const buffer = canvas.toBuffer();
-
-  const sticker = new Sticker(buffer, {
-    pack: 'Modo Brat',
-    author: 'Alfo',
-    type: StickerTypes.FULL,
-    quality: 80,
-  });
-
-  const stickerBuffer = await sticker.toBuffer();
-  await conn.sendMessage(m.chat, { sticker: stickerBuffer }, { quoted: m });
-};
-
-handler.help = ['brat <texto>'];
-handler.tags = ['fun'];
-handler.command = /^brat$/i;
-
-export default handler;
+handler.help = ['brat <texto>']
+handler.tags = ['sticker']
+handler.command = ['brat']
+handler.register = false
+export default handler
