@@ -1,38 +1,79 @@
-// plugins/sticker-brat.js
-import { sticker } from '../lib/sticker.js'
-import axios from 'axios'
+import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
+import sharp from 'sharp';
+import {
+    tmpdir
+} from 'os';
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const handler = async (m, { conn, args, usedPrefix, command }) => {
-  let text
+const fetchSticker = async (text, attempt = 1) => {
+    try {
+        const response = await axios.get(`https://kepolu-brat.hf.space/brat`, {
+            params: {
+                q: text
+            },
+            responseType: 'arraybuffer',
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response?.status === 429 && attempt <= 3) {
+            const retryAfter = error.response.headers['retry-after'] || 5;
+            await delay(retryAfter * 1000);
+            return fetchSticker(text, attempt + 1);
+        }
+        throw error;
+    }
+};
 
-  if (args.length >= 1) {
-    text = args.join(' ')
-  } else if (m.quoted && m.quoted.text) {
-    text = m.quoted.text
-  } else {
-    return conn.reply(m.chat, `✳️ Usa el comando así:\n${usedPrefix + command} no me hables >:c`, m)
-  }
+const handler = async (m, {
+    text,
+    conn
+}) => {
+    if (!text) {
+        return conn.sendMessage(m.chat, {
+            text: `${emoji} Por favor ingresa el texto para hacer un sticker.`,
+        }, {
+            quoted: m
+        });
+    }
 
-  if (text.length > 60) return conn.reply(m.chat, '💬 El texto no puede tener más de 60 caracteres.', m)
+    try {
+        const buffer = await fetchSticker(text);
+        const outputFilePath = path.join(tmpdir(), `sticker-${Date.now()}.webp`);
+        await sharp(buffer)
+            .resize(512, 512, {
+                fit: 'contain',
+                background: {
+                    r: 255,
+                    g: 255,
+                    b: 255,
+                    alpha: 0
+                }
+            })
+            .webp({
+                quality: 80
+            })
+            .toFile(outputFilePath);
 
-  // Generar imagen tipo brat con API personalizada (aquí usamos un fondo rosa básico)
-  const apiURL = `https://api.popcat.xyz/sticker?text=${encodeURIComponent(text)}&color=ffc0cb&background=1`
+        await conn.sendMessage(m.chat, {
+            sticker: {
+                url: outputFilePath
+            },
+        }, {
+            quoted: fkontak
+        });
+        fs.unlinkSync(outputFilePath);
+    } catch (error) {
+        return conn.sendMessage(m.chat, {
+            text: `${msm} Ocurrio un error.`,
+        }, {
+            quoted: m
+        });
+    }
+};
+handler.command = ['brat'];
+handler.tags = ['sticker'];
+handler.help = ['brat *<texto>*'];
 
-  try {
-    const response = await axios.get(apiURL, { responseType: 'arraybuffer' })
-    const buffer = Buffer.from(response.data)
-
-    const stiker = await sticker(buffer, false, global.packname, global.author)
-    if (stiker) return conn.sendFile(m.chat, stiker, 'brat.webp', '', m)
-    else throw '⚠️ No se pudo generar el sticker.'
-  } catch (e) {
-    console.error(e)
-    return conn.reply(m.chat, '❌ Ocurrió un error al generar el sticker.', m)
-  }
-}
-
-handler.help = ['brat <texto>']
-handler.tags = ['sticker']
-handler.command = ['brat']
-handler.register = false
-export default handler
+export default handler;
