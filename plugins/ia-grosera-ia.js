@@ -87,7 +87,7 @@ handler.help = ['iagrosera <texto>', 'brut <texto>']
 handler.tags = ['ai']
 handler.group = true
 handler.register = false
-handler.command = ['iagrosera33']
+handler.command = ['iagrosera']
 
 // Handler adicional para detectar respuestas a mensajes del bot
 handler.before = async (m, { conn, participants }) => {
