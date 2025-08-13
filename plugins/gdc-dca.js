@@ -86,7 +86,7 @@ Y con esto le damos las gracias y bienvenidas a todos, espero y la pasen bien ‚ù
   `.trim()
 
   // Ruta relativa al archivo desde el mismo nivel del handler
-  const imgPath = path.join('./src', 'guerra-de-clanes.jpeg')
+  const imgPath = path.join('./src/freefire', 'logo-clan.jpg')
   const buffer = await fs.readFile(imgPath)
 
   await conn.sendMessage(m.chat, {
