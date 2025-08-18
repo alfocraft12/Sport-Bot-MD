@@ -46,7 +46,7 @@ global.db.data.users[m.sender] = {}
 if (user) {
 if (!isNumber(user.exp)) user.exp = 0
 if (!('premium' in user)) user.premium = false
-if (!('muto' in user)) user.muto = false
+if (!('mute' in user)) user.mute = false
 if (!isNumber(user.joincount)) user.joincount = 1
 if (!isNumber(user.money)) user.money = 150
 if (!isNumber(user.moras)) user.moras = 10
@@ -103,7 +103,7 @@ lastrob: 0,
 level: 0,
 moras: 10,
 money: 100,
-muto: false,
+mute: false,
 premium: false,
 premiumTime: 0,
 registered: false,
@@ -538,7 +538,7 @@ this.msgqueque.splice(quequeIndex, 1)
 //console.log(global.db.data.users[m.sender])
 let user, stats = global.db.data.stats
 if (m) { let utente = global.db.data.users[m.sender]
-if (utente.muto == true) {
+if (utente.mute == true) {
 let bang = m.key.id
 let cancellazzione = m.key.participant
 for(let i = 0; i < 5; i++){try{await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: bang, participant: cancellazzione }})}catch{}}}
