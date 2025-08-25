@@ -16,36 +16,54 @@ Ideal para clanes, comunidades de juegos y grupos gaming que buscan control, div
 
 
 
-## 📌 Activar en Termux 📌
+🍟 **`INSTALACION MANUAL POR TERMUX`**
 
-**🧠 ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:**
+[`🚩 Instalar Termux Clic Aqui`](https://www.mediafire.com/file/pqd980pnrqrz7r3/termux-app_v0.118.1+github-debug_arm64-v8a.apk/file)
 
-# 🔓 Dar permisos al almacenamiento
+> ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 
-> cd && termux-setup-storage
+```bash
+termux-setup-storage
+```
+```bash
+apt update && apt upgrade && pkg install -y git nodejs ffmpeg imagemagick yarn
+```
+```bash
+git clone https://github.com/CheirZ/HuTao-Proyect.git && cd HuTao-Proyect
+```
+```bash
+yarn install && npm update && npm install
+```
+```bash
+npm start
+```
 
-# 🔄 Actualizar paquetes
-
-> apt-get update -y && apt-get upgrade -y
-
-# 📦 Instalar dependencias necesarias
-
-> pkg install -y git nodejs ffmpeg imagemagick yarn
-
-# 🧠 Clonar tu repositorio personalizado
-
-> git clone https://github.com/alfocraft12/Sport-Bot-MD
-
-# 📁 Entrar al directorio del bot
-
-> cd Sport-Bot-MD
-
-# 📥 Instalar dependencias del proyecto
-
-> yarn install
-> npm install
-> npm update
-
-# 🚀 Iniciar el bot
-
+🍟 **`ACTIVAR EN TERMUX EN CASO DE DETENERSE`**
+```bash
+ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
+> cd 
+> cd HuTao-Proyect
 > npm start
+```
+
+🔥 **`OBTENER OTRO CODIGO QR`**
+```bash
+> ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
+> cd HuTao-Proyect
+> rm -rf Seccion-activas
+> npm start
+```
+
+🍟 **`HuTao-Proyect 24/7 (TERMUX)`**
+```bash
+> termux-wake-lock && npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs 
+```
+
+💥 **`ACTUALIZAR HuTao`**
+> Note Comandos para actualizar HuTao-Proyect de forma automática
+```bash
+grep -q 'bash\|wget' <(dpkg -l) || apt install -y bash wget && wget -O - https://raw.githubusercontent.com/CheirZ/HuTao-Proyect/master/update.sh | bash
+```
+Para que no pierda su progreso en HuTao, estos comandos realizarán un respaldo de su `database.json` y se agregará a la versión más reciente.
+
+> Warning Estos comandos solo funcionan para TERMUX, REPLIT, LINUX
