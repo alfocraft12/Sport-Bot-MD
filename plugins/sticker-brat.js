@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { Sticker, StickerTypes } from 'wa-sticker-formatter';
+import fs from 'fs';
+import path from 'path';
+import sharp from 'sharp';
+import { tmpdir } from 'os';
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -23,28 +26,37 @@ const fetchSticker = async (text, attempt = 1) => {
 const handler = async (m, { text, conn }) => {
     if (!text) {
         return conn.sendMessage(m.chat, {
-            text: "⚠️ Ingresa un texto para hacer el sticker."
+            text: `Por favor ingresa el texto para hacer un sticker.`,
         }, { quoted: m });
     }
 
     try {
         const buffer = await fetchSticker(text);
+        const outputFilePath = path.join(tmpdir(), `sticker-${Date.now()}.webp`);
+        
+        await sharp(buffer)
+            .resize(512, 512, {
+                fit: 'contain',
+                background: { r: 255, g: 255, b: 255, alpha: 0 }
+            })
+            .webp({ quality: 80 })
+            .toFile(outputFilePath);
 
-        // Convertir el buffer a sticker válido con metadatos
-        const sticker = new Sticker(buffer, {
-            pack: 'Sport-Bot',     // nombre del pack
-            author: 'Alfo',        // autor
-            type: StickerTypes.FULL, // ajuste de tamaño
-            quality: 80
-        });
-
+        // Lee el archivo como buffer
+        const stickerBuffer = fs.readFileSync(outputFilePath);
+        
+        // Envía el sticker usando el buffer directamente
         await conn.sendMessage(m.chat, {
-            sticker: await sticker.build()
-        }, { quoted: m });
+            sticker: stickerBuffer
+        }, { quoted: m }); // Cambié fkontak por m si fkontak no está definido
 
+        // Limpia el archivo temporal
+        fs.unlinkSync(outputFilePath);
+        
     } catch (error) {
+        console.error('Error:', error);
         return conn.sendMessage(m.chat, {
-            text: "❌ Ocurrió un error al generar el sticker."
+            text: `Ocurrió un error al crear el sticker.`,
         }, { quoted: m });
     }
 };
@@ -52,5 +64,4 @@ const handler = async (m, { text, conn }) => {
 handler.command = ['brat'];
 handler.tags = ['sticker'];
 handler.help = ['brat *<texto>*'];
-
 export default handler;
