@@ -53,7 +53,7 @@ say('Sport-Bot-MD', {
 say('Made With Alfocraft 12', {
   font: 'console',
   align: 'center',
-  colors: ['cyan', 'magenta', 'yellow', 'gold']
+  colors: ['cyan', 'magenta', 'yellow', 'yellowBright,']
 })
 
 protoType()
