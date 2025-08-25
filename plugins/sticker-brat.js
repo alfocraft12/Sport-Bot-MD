@@ -30,7 +30,8 @@ const handler = async (m, { text, conn }) => {
         const buffer = await fetchSticker(text);
 
         await conn.sendMessage(m.chat, {
-            sticker: buffer
+            sticker: buffer,
+            mimetype: "image/webp"  // 👈 importante para que WhatsApp lo reconozca
         }, { quoted: m });
 
     } catch (error) {
