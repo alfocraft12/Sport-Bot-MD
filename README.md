@@ -29,7 +29,7 @@ termux-setup-storage
 apt update && apt upgrade && pkg install -y git nodejs ffmpeg imagemagick yarn
 ```
 ```bash
-git clone https://github.com/CheirZ/HuTao-Proyect.git && cd HuTao-Proyect
+git clone https://github.com/alfocraft12/Sport-Bot-MD.git && cd Sport-Bot-MD
 ```
 ```bash
 yarn install && npm update && npm install
@@ -42,7 +42,7 @@ npm start
 ```bash
 ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 > cd 
-> cd HuTao-Proyect
+> cd Sport-Bot-MD
 > npm start
 ```
 
