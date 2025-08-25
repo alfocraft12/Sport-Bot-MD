@@ -46,7 +46,7 @@ global.db.data.users[m.sender] = {}
 if (user) {
 if (!isNumber(user.exp)) user.exp = 0
 if (!('premium' in user)) user.premium = false
-if (!('mute' in user)) user.mute = false
+if (!('muto' in user)) user.muto = false
 if (!isNumber(user.joincount)) user.joincount = 1
 if (!isNumber(user.money)) user.money = 150
 if (!isNumber(user.moras)) user.moras = 10
@@ -103,7 +103,7 @@ lastrob: 0,
 level: 0,
 moras: 10,
 money: 100,
-mute: false,
+muto: false,
 premium: false,
 premiumTime: 0,
 registered: false,
@@ -538,7 +538,7 @@ this.msgqueque.splice(quequeIndex, 1)
 //console.log(global.db.data.users[m.sender])
 let user, stats = global.db.data.stats
 if (m) { let utente = global.db.data.users[m.sender]
-if (utente.mute == true) {
+if (utente.muto == true) {
 let bang = m.key.id
 let cancellazzione = m.key.participant
 for(let i = 0; i < 5; i++){try{await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: bang, participant: cancellazzione }})}catch{}}}
@@ -737,15 +737,15 @@ console.error(e)
 
 global.dfail = (type, m, conn) => {
 const msg = {
-rowner: '[ ⚠︎ ] el comando es exclusivo para Inm Alfo y DcA Barbie.',
-    owner: '[ ⚠︎ ] el comando es exclusivo para Alfo.',
+rowner: '[ ⚠︎ ] el comando es exclusivo para owners.',
+    owner: '[ ⚠︎ ] el comando es exclusivo para owners.',
     mods: '[ ⚠︎ ] el comando solo lo pueden usar los moderadores.',
     premium: '[ ⚠︎ ] este comando es solo para usuarios premium.',
     group: '[ ⚠︎ ] este comando solo se puede usar en grupos.',
     private: '[ ⚠︎ ] este comando solo se puede usar en chat privado.',
-    admin: '[ ⚠︎ ] a ti te pica o te patea? no ves que estos comandos solo pueden ser usados por admins bruto??',
-    botAdmin: '[ ⚠︎ ] para usar este comando es necesario que yo sea admin del grupo brut@.',
-    unreg: '[⌨︎] jelou, bienvenido a la comunidad de Sport-Bot, para hacer esto necesitas estar registrado... hazlo usando\n\n!Reg Name.22\n\n𝕒𝕢𝕦𝕚 𝕦𝕟 𝕖𝕛𝕖𝕞𝕡𝕝𝕠 = !reg alfo.16\n\n\n 𝕖𝕤𝕡𝕖𝕣𝕠 𝕙𝕒𝕪𝕒𝕤 𝕖𝕟𝕥𝕖𝕟𝕕𝕚𝕕𝕠 𝕪 𝕒𝕤𝕚 𝕡𝕦𝕖𝕕𝕒𝕤 𝕦𝕤𝕒𝕣 𝕖𝕝 𝕓𝕠𝕥',
+    admin: '[ ⚠︎ ] este comando solo lo pueden usar los admins del grupo.',
+    botAdmin: '[ ⚠︎ ] para usar este comando es necesario que yo sea admin.',
+    unreg: '[⌨︎] 𝕙𝕠𝕝𝕒, 𝕓𝕚𝕖𝕟𝕧𝕖𝕟𝕚𝕕𝕠 𝕒 𝕝𝕒 𝕔𝕠𝕞𝕦𝕟𝕚𝕕𝕒𝕕 𝕕𝕖 𝕙𝕦𝕥𝕒𝕠-𝕞𝕕, 𝕝𝕖 𝕚𝕟𝕗𝕠𝕣𝕞𝕠 𝕢𝕦𝕖 𝕟𝕠 𝕤𝕖 𝕖𝕟𝕔𝕦𝕖𝕟𝕥𝕣𝕒 𝕣𝕖𝕘𝕚𝕤𝕥𝕣𝕒𝕕𝕠, 𝕡𝕒𝕣𝕒 𝕙𝕒𝕔𝕖𝕣𝕝𝕠 𝕦𝕤𝕖 𝕖𝕝 𝕔𝕠𝕞𝕒𝕟𝕕𝕠\n\n!Reg Name.22\n\n𝕒𝕢𝕦𝕚 𝕦𝕟 𝕖𝕛𝕖𝕞𝕡𝕝𝕠 = !reg huato.22\n\n\n 𝕖𝕤𝕡𝕖𝕣𝕠 𝕙𝕒𝕪𝕒𝕤 𝕖𝕟𝕥𝕖𝕟𝕕𝕚𝕕𝕠 𝕪 𝕒𝕤𝕚 𝕡𝕦𝕖𝕕𝕒𝕤 𝕦𝕤𝕒𝕣 𝕖𝕝 𝕓𝕠𝕥',
     restrict: '[ ⚠︎ ] This command is restricted/disables owner',
        restrict: '[ ⚠︎ ]\nᴱˢᵗᵉ ᶜᵒᵐᵃⁿᵈᵒ ᴱˢᵗᵃ ᴿᵉˢᵗʳⁱⁿᵍⁱᵈᵒ/ᴰᵉˢᵃᶜᵗⁱᵛᵃ ᴾᵒʳ ᴰᵉˢⁱᶜⁱᵒⁿ ᴰᵉˡ ᴾʳᵒᵖⁱᵉᵗᵃʳⁱᵒ/ᴬ (ᵒʷⁿᵉʳ) ᴰᵉˡ ᴮᵒᵗ'
 }[type];
