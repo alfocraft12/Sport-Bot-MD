@@ -45,7 +45,7 @@ let { say } = cfonts
 
 console.log(chalk.magentaBright('\nIniciando...'))
 
-say('HuTao', {
+say('Sport-Bot-MD', {
   font: 'simple',
   align: 'left',
   gradient: ['blue', 'white']
