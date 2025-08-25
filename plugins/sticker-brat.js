@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Sticker, StickerTypes } from 'wa-sticker-formatter';
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -29,9 +30,16 @@ const handler = async (m, { text, conn }) => {
     try {
         const buffer = await fetchSticker(text);
 
+        // Convertir el buffer a sticker válido con metadatos
+        const sticker = new Sticker(buffer, {
+            pack: 'Sport-Bot',     // nombre del pack
+            author: 'Alfo',        // autor
+            type: StickerTypes.FULL, // ajuste de tamaño
+            quality: 80
+        });
+
         await conn.sendMessage(m.chat, {
-            sticker: buffer,
-            mimetype: "image/webp"  // 👈 importante para que WhatsApp lo reconozca
+            sticker: await sticker.build()
         }, { quoted: m });
 
     } catch (error) {
