@@ -48,12 +48,12 @@ console.log(chalk.magentaBright('\nIniciando...'))
 say('HuTao', {
   font: 'simple',
   align: 'left',
-  gradient: ['green', 'white']
+  gradient: ['blue', 'white']
 })
-say('Made With CheirZ', {
+say('Made With Alfocraft 12', {
   font: 'console',
   align: 'center',
-  colors: ['cyan', 'magenta', 'yellow']
+  colors: ['cyan', 'magenta', 'yellow', 'gold']
 })
 
 protoType()
@@ -193,7 +193,7 @@ if (!!phoneNumber) {
 addNumber = phoneNumber.replace(/[^0-9]/g, '')
 } else {
 do {
-phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`[ ✿ ]  Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.magentaBright('---> ')}`)))
+phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`[ 💋 ]  Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.magentaBright('---> ')}`)))
 phoneNumber = phoneNumber.replace(/\D/g,'')
 if (!phoneNumber.startsWith('+')) {
 phoneNumber = `+${phoneNumber}`
@@ -204,14 +204,14 @@ addNumber = phoneNumber.replace(/\D/g, '')
 setTimeout(async () => {
 let codeBot = await conn.requestPairingCode(addNumber)
 codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
-console.log(chalk.bold.white(chalk.bgMagenta(`[ ✿ ]  Código:`)), chalk.bold.white(chalk.white(codeBot)))
+console.log(chalk.bold.white(chalk.bgMagenta(`[ 💋 ]  Código:`)), chalk.bold.white(chalk.white(codeBot)))
 }, 3000)
 }}}
 }
 
 conn.isInit = false;
 conn.well = false;
-conn.logger.info(`[ ✿ ]  H E C H O\n`)
+conn.logger.info(`[ 👑 ]  L I S T O\n`)
 
 if (!opts['test']) {
 if (global.db) setInterval(async () => {
@@ -231,7 +231,7 @@ async function resolveLidToRealJid(lidJid, groupJid, maxRetries = 3, retryDelay 
     while (attempts < maxRetries) {
         try {
             const metadata = await conn.groupMetadata(groupJid);
-            if (!metadata?.participants) throw new Error("No se obtuvieron participantes");
+            if (!metadata?.participants) throw new Error("No se obtuvieron participantes aqui");
             for (const participant of metadata.participants) {
                 try {
                     if (!participant?.jid) continue;
@@ -332,37 +332,37 @@ global.timestamp.connect = new Date;
 if (global.db.data == null) loadDatabase();
 if (update.qr != 0 && update.qr != undefined || methodCodeQR) {
 if (opcion == '1' || methodCodeQR) {
-console.log(chalk.green.bold(`[ ✿ ]  Escanea este código QR`))}
+console.log(chalk.green.bold(`[ 💋 ]  Escanea este código QR pls`))}
 }
         if (connection === "open") {
             const userJid = jidNormalizedUser(conn.user.id)
          await joinChannels(conn)
             const userName = conn.user.name || conn.user.verifiedName || "Desconocido"
-            console.log(chalk.green.bold(`[ ✿ ]  Conectado a: ${userName}`))
+            console.log(chalk.green.bold(`[ 👑 ]  Se Conecto a: ${userName}`))
         }
 let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
 if (connection === 'close') {
 if (reason === DisconnectReason.badSession) {
-console.log(chalk.bold.cyanBright(`\n💦 Sin conexión, borra la session principal del Bot, y conectate nuevamente.`))
+console.log(chalk.bold.cyanBright(`\n❗ Sin conexión, borra la session principal del Bot, y conectate nuevamente.`))
 } else if (reason === DisconnectReason.connectionClosed) {
-console.log(chalk.bold.magentaBright(`\n🎋 Reconectando la conexión del Bot...`))
+console.log(chalk.bold.magentaBright(`\n📥 Reconectando la conexión del Bot...`))
 await globalThis.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.connectionLost) {
-console.log(chalk.bold.blueBright(`\n🍁 Conexión perdida con el servidor, reconectando el Bot...`))
+console.log(chalk.bold.blueBright(`\n💋 Conexión perdida con el servidor, reconectando el Bot...`))
 await globalThis.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.connectionReplaced) {
-console.log(chalk.bold.yellowBright(`\n🐷 La conexión del Bot ha sido reemplazada.`))
+console.log(chalk.bold.yellowBright(`\n🤣 La conexión del Bot ha sido reemplazada.`))
 } else if (reason === DisconnectReason.loggedOut) {
-console.log(chalk.bold.redBright(`\n🍀 Sin conexión, borra la session principal del Bot, y conectate nuevamente.`))
+console.log(chalk.bold.redBright(`\n🚫 Sin conexión, borra la session principal del Bot, y conectate nuevamente.`))
 await globalThis.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.restartRequired) {
-console.log(chalk.bold.cyanBright(`\n🐞 Conectando el Bot con el servidor...`))
+console.log(chalk.bold.cyanBright(`\n💋 Conectando el Bot con el servidor...`))
 await globalThis.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.timedOut) {
-console.log(chalk.bold.yellowBright(`\n🦋 Conexión agotada, reconectando el Bot...`))
+console.log(chalk.bold.yellowBright(`\n⏰ Conexión agotada, reconectando el Bot...`))
 await globalThis.reloadHandler(true).catch(console.error) //process.send('reset')
 } else {
-console.log(chalk.bold.redBright(`\n🎍 Conexión cerrada, conectese nuevamente.`))
+console.log(chalk.bold.redBright(`\n🤣 Conexión cerrada, conectese nuevamente.`))
 }}
 }
 process.on('uncaughtException', console.error)
@@ -412,7 +412,7 @@ return true
 };
 
 setInterval(() => {
-console.log('[ ✿ ]  Reiniciando...');
+console.log('[ 🗣 ]  Reiniciando...');
 process.exit(0); 
 }, 10800000) //3hs
 //3600000
@@ -508,9 +508,9 @@ const filenames = readdirSync(tmpDir)
 filenames.forEach(file => {
 const filePath = join(tmpDir, file)
 unlinkSync(filePath)})
-console.log(chalk.gray(`→ Archivos de la carpeta TMP eliminados`))
+console.log(chalk.gray(`👌→ Archivos de la carpeta TMP eliminados`))
 } catch {
-console.log(chalk.gray(`→ Los archivos de la carpeta TMP no se pudieron eliminar`));
+console.log(chalk.gray(`✌→ Los archivos de la carpeta TMP no se pudieron eliminar`));
 }}, 30 * 1000) 
 
 // Sessions Subs
@@ -524,9 +524,9 @@ if (file !== 'creds.json') {
 const filePath = path.join(dir, file);
 unlinkSync(filePath, err => {
 if (err) {
-console.log(chalk.gray(`\n→ El archivo ${file} no se logró borrar.\n` + err))
+console.log(chalk.gray(`\n❌→ El archivo ${file} no se logró borrar.\n` + err))
 } else {
-console.log(chalk.gray(`\n→ ${file} fué eliminado correctamente.`))
+console.log(chalk.gray(`\n👏→ ${file} fué eliminado correctamente.`))
 } }) }
 }) }) }) }, 10 * 60 * 1000)
 
