@@ -49,17 +49,17 @@ ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 🔥 **`OBTENER OTRO CODIGO QR`**
 ```bash
 > ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
-> cd HuTao-Proyect
+> cd Sport-Bot-MD
 > rm -rf Seccion-activas
 > npm start
 ```
 
-🍟 **`HuTao-Proyect 24/7 (TERMUX)`**
+🍟 **`Sport-Bot-MD 24/7 (TERMUX)`**
 ```bash
 > termux-wake-lock && npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs 
 ```
 
-💥 **`ACTUALIZAR HuTao`**
+💥 **`ACTUALIZAR Sport`**
 > Note Comandos para actualizar HuTao-Proyect de forma automática
 ```bash
 grep -q 'bash\|wget' <(dpkg -l) || apt install -y bash wget && wget -O - https://raw.githubusercontent.com/CheirZ/HuTao-Proyect/master/update.sh | bash
