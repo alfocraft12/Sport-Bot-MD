@@ -257,7 +257,9 @@ const isROwner = global.owner
     .map(ownerData => String(ownerData[0]).replace(/[^0-9]/g, '') + detectwhat)
     .includes(m.sender);
 const isOwner = isROwner || m.fromMe
-const isMods = isOwner || global.mods.map(v => v.replace(/[^0-9]/g, '') + detectwhat).includes(m.sender);
+const isMods = global.mods
+    .map(modData => String(modData[0]).replace(/[^0-9]/g, '') + detectwhat) // Si mods tiene la misma estructura
+    .includes(m.sender);
 const isPrems = isROwner || global.db.data.users[m.sender].premiumTime > 0
 if (opts['queque'] && m.text && !(isMods || isPrems)) {
 let queque = this.msgqueque, time = 1000 * 5
