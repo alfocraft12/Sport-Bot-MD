@@ -8,9 +8,15 @@ var handler = async (m, { conn, usedPrefix }) => {
     }
     
     let chatId = m.isGroup ? [m.chat, m.sender] : [m.sender]
-    let sessionPath = `./sessions/` 
+    let sessionPath = `./${global.sessions}/`  // Cambiado aquí
     
     try {
+        // Verificar si la carpeta existe
+        if (!existsSync(sessionPath)) {
+            await conn.reply(m.chat, `🚩 *La carpeta de sesiones "${global.sessions}" no existe*`, m, rcanal, )
+            return
+        }
+        
         let files = await fs.readdir(sessionPath)
         let filesDeleted = 0
         
