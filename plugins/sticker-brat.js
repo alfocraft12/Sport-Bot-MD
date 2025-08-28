@@ -1,8 +1,16 @@
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
-import sharp from 'sharp';
 import { tmpdir } from 'os';
+
+// Importación segura de Sharp
+let sharp = null;
+try {
+    const sharpModule = await import('sharp');
+    sharp = sharpModule.default;
+} catch (error) {
+    console.warn('Sharp no disponible, stickers se crearán sin redimensionar');
+}
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -32,31 +40,40 @@ const handler = async (m, { text, conn }) => {
 
     try {
         const buffer = await fetchSticker(text);
-        const outputFilePath = path.join(tmpdir(), `sticker-${Date.now()}.webp`);
-        
-        await sharp(buffer)
-            .resize(512, 512, {
-                fit: 'contain',
-                background: { r: 255, g: 255, b: 255, alpha: 0 }
-            })
-            .webp({ quality: 80 })
-            .toFile(outputFilePath);
+        let stickerBuffer;
 
-        // Lee el archivo como buffer
-        const stickerBuffer = fs.readFileSync(outputFilePath);
+        if (sharp) {
+            // Usar Sharp si está disponible
+            const outputFilePath = path.join(tmpdir(), `sticker-${Date.now()}.webp`);
+            
+            await sharp(buffer)
+                .resize(512, 512, {
+                    fit: 'contain',
+                    background: { r: 255, g: 255, b: 255, alpha: 0 }
+                })
+                .webp({ quality: 80 })
+                .toFile(outputFilePath);
+            
+            // Lee el archivo como buffer
+            stickerBuffer = fs.readFileSync(outputFilePath);
+            
+            // Limpia el archivo temporal
+            fs.unlinkSync(outputFilePath);
+        } else {
+            // Usar el buffer original si Sharp no está disponible
+            console.log('Usando imagen original (Sharp no disponible)');
+            stickerBuffer = Buffer.from(buffer);
+        }
         
-        // Envía el sticker usando el buffer directamente
+        // Envía el sticker usando el buffer
         await conn.sendMessage(m.chat, {
             sticker: stickerBuffer
-        }, { quoted: m }); // Cambié fkontak por m si fkontak no está definido
-
-        // Limpia el archivo temporal
-        fs.unlinkSync(outputFilePath);
+        }, { quoted: m });
         
     } catch (error) {
         console.error('Error:', error);
         return conn.sendMessage(m.chat, {
-            text: `Ocurrió un error al crear el sticker.`,
+            text: `Ocurrió un error al crear el sticker: ${error.message}`,
         }, { quoted: m });
     }
 };
@@ -64,4 +81,5 @@ const handler = async (m, { text, conn }) => {
 handler.command = ['brat'];
 handler.tags = ['sticker'];
 handler.help = ['brat *<texto>*'];
+
 export default handler;
