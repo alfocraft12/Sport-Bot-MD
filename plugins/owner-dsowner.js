@@ -11,7 +11,7 @@ return conn.reply(m.chat, '☯︎ *Te recmiendo utilizar este comando desde el n
 await conn.reply(m.chat, '🂱 *Iniciando proceso de eliminación de todos los archivos de sesión, excepto el archivo creds.json...*', m, rcanal, )
 m.react(rwait)
 
-let sessionPath = './${sessions}/'
+let sessionPath = './${global.sessions}/'
 
 try {
 
