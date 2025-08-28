@@ -252,9 +252,7 @@ console.error(e)
 }
 
 const detectwhat = m.sender.includes('@lid') ? '@lid' : '@s.whatsapp.net'
-const isROwner = [...global.owner.map((number) => number)].map(v => {
-    return (typeof v === 'string' ? v : String(v)).replace(/[^0-9]/g, '') + detectwhat
-}).includes(m.sender)
+const isROwner = global.owner.map(number => String(number).replace(/[^0-9]/g, '') + detectwhat).includes(m.sender)
 const isOwner = isROwner || m.fromMe
 const isMods = isOwner || global.mods.map(v => v.replace(/[^0-9]/g, '') + detectwhat).includes(m.sender);
 const isPrems = isROwner || global.db.data.users[m.sender].premiumTime > 0
