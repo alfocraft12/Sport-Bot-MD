@@ -1,5 +1,4 @@
 let handler = async (m, { conn, usedPrefix, command}) => {
-
 let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
 
 let yaemori = `*🔝 SISTEMA DE PUNTOS EN GUERRA DE CLANES Br 🔝*
@@ -55,11 +54,12 @@ _Es decir:_
 > 🔺Si la menor partida del jugador es un booyah con 4 kills, la siguiente partida tiene que ser de 1 booyah 5 kills, y así entre los tops.🔻
 
 Es todo 😊
-
 ${global.md}`.trim()
-await conn.reply(m.chat, yaemori, m, fake)
 
+// Enviar la imagen con el texto
+await conn.sendFile(m.chat, 'src/freefire/guerra-de-clanes.jpg', 'guerra-de-clanes.jpg', yaemori, m, false, { contextInfo: fkontak })
 }
+
 handler.help = ['guerra de clanes']
 handler.tags = ['free fire']
 handler.command = ['puntosgdc', 'gdcpuntos']
@@ -68,7 +68,6 @@ export default handler
 
 const more = String.fromCharCode(8206)
 const readMore = more.repeat(4001)
-
 function clockString(ms) {
 let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
 let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
