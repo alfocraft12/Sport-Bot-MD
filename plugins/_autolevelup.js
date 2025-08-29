@@ -1,4 +1,4 @@
-import { canLevelUp, xpRange } from '../lib/levelling.js'
+/* import { canLevelUp, xpRange } from '../lib/levelling.js'
 import { levelup } from '../lib/canvas.js'
 
 let handler = m => m
@@ -430,7 +430,7 @@ global.roles = {
 // Nivel 300+: Inmortales
 '🔥 *Héroe(a) Inmortal V*': 1000,
 '🔥 *Héroe(a) Inmortal IV*': 2000,
-'🔥 *Héroe(a) Inmortal III*': 3000,
+'🔥 *Héroe(a) Inmortal III*': 3000, */
 '🔥 *Héroe(a) Inmortal II*': 4000,
 '🔥 *Héroe(a) Inmortal I*': 5000,
 '👑🌌 *Eterna Deidad del Multiverso* ⚡': 10000,
