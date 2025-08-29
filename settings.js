@@ -68,7 +68,7 @@ channel4: "120363393102930979@newsletter"
 global.gp4 = 'https://chat.whatsapp.com/LcifaLUrmww6CPT27IuSAa'
 global.gp1 = 'https://chat.whatsapp.com/GFyLX1dDDxI0utho5GBmJI'
 global.channel = ' https://whatsapp.com/channel/0029Vb3yM0T2v1ItNDrGIY3v'
-global.md = 'https://github.com/CheirZ'
+global.md = 'https://www.instagram.com/alfonso_graterol'
 global.correo = 'alfocraft12fans@gmail.com'
 global.cn = ' https://whatsapp.com/channel/0029Vb3yM0T2v1ItNDrGIY3v'
 
