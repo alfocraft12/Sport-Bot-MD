@@ -411,11 +411,11 @@ isInit = false
 return true
 };
 
-setInterval(() => {
+/* setInterval(() => {
 console.log('[ 🗣 ]  Reiniciando...');
 process.exit(0); 
 }, 10800000) //3hs
-//3600000
+//3600000*/
 
 let rtU = join(__dirname, `./${jadi}`)
 
