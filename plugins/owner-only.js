@@ -1,12 +1,7 @@
 import { setExclusiveUser, removeExclusiveUser, getExclusiveUser } from '../lib/exclusive.js'
 
-let handler = async (m, { conn, text, participants, isOwner, isAdmin }) => {
+let handler = async (m, { conn, text, participants }) => {
     if (!m.isGroup) return m.reply('❌ Este comando solo funciona en grupos')
-    
-    // Solo el owner del bot o admins del grupo pueden usar este comando
-    if (!isOwner && !isAdmin) {
-        return m.reply('❌ Solo los administradores o el owner pueden usar este comando')
-    }
     
     if (!text) {
         // Mostrar usuario actual
@@ -49,10 +44,9 @@ let handler = async (m, { conn, text, participants, isOwner, isAdmin }) => {
 }
 
 handler.help = ['only']
-handler.tags = ['owner', 'admin']
+handler.tags = ['owner']
 handler.command = /^(only|solo)$/i
 handler.group = true
-handler.admin = false
-handler.owner = true
+handler.owner = true  // <- ESTA ES LA LÍNEA CLAVE
 
 export default handler
