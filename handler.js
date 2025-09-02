@@ -7,6 +7,7 @@ import {unwatchFile, watchFile} from 'fs';
 import fs from 'fs';
 import chalk from 'chalk';
 import ws from 'ws';
+import { checkExclusiveAccess } from './lib/middleware.js';
 
 /**
  * @type {import('@adiwajshing/baileys')}  
@@ -398,6 +399,11 @@ if ((m.id.startsWith('NJX-') || (m.id.startsWith('BAE5') && m.id.length === 16) 
 if (!isAccept) {
 continue
 }
+
+if (!checkExclusiveAccess(m)) {
+    continue // Saltar este comando si no tiene acceso
+}
+
 m.plugin = name
 if (m.chat in global.db.data.chats || m.sender in global.db.data.users) {
 let chat = global.db.data.chats[m.chat]
