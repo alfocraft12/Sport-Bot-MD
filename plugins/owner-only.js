@@ -1,4 +1,4 @@
-import { setExclusiveUser, removeExclusiveUser, getExclusiveUser } from '../lib/exclusive.js'
+/* import { setExclusiveUser, removeExclusiveUser, getExclusiveUser } from '../lib/exclusive.js'
 
 let handler = async (m, { conn, text, participants }) => {
     if (!m.isGroup) return m.reply('❌ Este comando solo funciona en grupos')
