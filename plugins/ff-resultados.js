@@ -1,4 +1,9 @@
-const handler = async (m, { conn, usedPrefix }) => {
+const handler = async (m, { conn, usedPrefix, args, text }) => {
+  // Verificar si es owner
+  if (!m.fromMe && !global.owner.some(num => m.sender.includes(num))) {
+    return conn.reply(m.chat, '❌ Este comando solo puede ser usado por el owner del bot.', m);
+  }
+
   // Verificar si hay un mensaje citado
   if (!m.quoted) {
     return conn.reply(m.chat, '❌ Debes responder a un mensaje que contenga la ficha de resultados', m);
@@ -12,6 +17,18 @@ const handler = async (m, { conn, usedPrefix }) => {
   }
 
   try {
+    // Procesar argumentos para descuentos
+    let descuento = 0;
+    let motivoDescuento = '';
+    
+    if (args.length > 0) {
+      const primerArg = args[0];
+      if (!isNaN(primerArg)) {
+        descuento = parseInt(primerArg);
+        motivoDescuento = args.slice(1).join(' ') || 'Sin especificar';
+      }
+    }
+
     // Sistema de puntos según la imagen (TOP = posición)
     const PUNTOS_POR_POSICION = {
       1: 12, 2: 10, 3: 9, 4: 8, 5: 6, 6: 5,
@@ -80,20 +97,31 @@ const handler = async (m, { conn, usedPrefix }) => {
     
     const puntosMapa = puntosB + puntosP + puntosK;
     const puntosKills = totalKills;
-    const totalPuntos = puntosMapa + puntosKills;
+    let totalPuntos = puntosMapa + puntosKills;
+    
+    // Aplicar descuento si se especificó
+    if (descuento > 0) {
+      totalPuntos -= descuento;
+    }
 
-    // Generar resultado detallado
-    const resultado = `*🏆 Resultado individual de scrim*
+    // Generar resultado con el nuevo formato
+    let resultado = `*🏆 Resultado individual de scrim*
 ——————————————
-*NOMBRE:* _${nombre}_
-*CASILLA:* _${posicionB > 0 ? posicionB : 'N/A'}_
+*NOMBRE:* *${nombre}*
+*CASILLA:* *${posicionB > 0 ? posicionB : 'N/A'}*
 ——————————————
 *Puntos de mapa:* ${puntosMapa}
 *Puntos de kills:* ${puntosKills}
 *Total de puntos:* ${totalPuntos}
 ——————————————
-*Incumplimiento de regla*
-no aplica`;
+*Incumplimiento de regla*`;
+
+    // Agregar información del descuento si existe
+    if (descuento > 0) {
+      resultado += `\n-${descuento} pts por ${motivoDescuento}`;
+    } else {
+      resultado += `\nno aplica`;
+    }
 
     // Reaccionar al mensaje original
     await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } });
@@ -110,6 +138,7 @@ no aplica`;
 handler.help = ["resultados"];
 handler.tags = ["torneo", "games"];
 handler.command = ['resultados', 'resultado'];
+handler.owner = true; // Solo owner puede usarlo
 handler.register = false;
 
 export default handler;
