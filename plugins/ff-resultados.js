@@ -1,6 +1,6 @@
-const handler = async (m, { conn, usedPrefix, args, text }) => {
+const handler = async (m, { conn, usedPrefix, args, text, isOwner }) => {
   // Verificar si es owner
-  if (!m.fromMe && !global.owner.some(num => m.sender.includes(num))) {
+  if (!isOwner) {
     return conn.reply(m.chat, '❌ Este comando solo puede ser usado por el owner del bot.', m);
   }
 
@@ -138,7 +138,7 @@ const handler = async (m, { conn, usedPrefix, args, text }) => {
 handler.help = ["resultados"];
 handler.tags = ["torneo", "games"];
 handler.command = ['resultados', 'resultado'];
-handler.owner = true; // Solo owner puede usarlo
+handler.owner = true;
 handler.register = false;
 
 export default handler;
