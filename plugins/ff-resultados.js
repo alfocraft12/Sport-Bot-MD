@@ -89,11 +89,6 @@ const handler = async (m, { conn, usedPrefix }) => {
 *CASILLA:* _${posicionB > 0 ? posicionB : 'N/A'}_
 ——————————————
 *Puntos de mapa:* ${puntosMapa}
-
-`${posicionB > 0 ? `• Mapa B (pos ${posicionB}): ${puntosB} pts` : ''}
-${posicionP > 0 ? `• Mapa P (pos ${posicionP}): ${puntosP} pts` : ''}
-${posicionK > 0 ? `• Mapa K (pos ${posicionK}): ${puntosK} pts` : ''}`
-
 *Puntos de kills:* ${puntosKills}
 *Total de puntos:* ${totalPuntos}
 ——————————————
