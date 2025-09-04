@@ -83,19 +83,21 @@ const handler = async (m, { conn, usedPrefix }) => {
     const totalPuntos = puntosMapa + puntosKills;
 
     // Generar resultado detallado
-    const resultado = `🏆 Resultado individual de scrim
+    const resultado = `*🏆 Resultado individual de scrim*
 ——————————————
-NOMBRE: ${nombre}
-CASILLA: ${posicionB > 0 ? posicionB : 'N/A'}
+*NOMBRE:* _${nombre}_
+*CASILLA:* _${posicionB > 0 ? posicionB : 'N/A'}_
 ——————————————
-Puntos de mapa: ${puntosMapa}
-${posicionB > 0 ? `• Mapa B (pos ${posicionB}): ${puntosB} pts` : ''}
+*Puntos de mapa:* ${puntosMapa}
+
+`${posicionB > 0 ? `• Mapa B (pos ${posicionB}): ${puntosB} pts` : ''}
 ${posicionP > 0 ? `• Mapa P (pos ${posicionP}): ${puntosP} pts` : ''}
-${posicionK > 0 ? `• Mapa K (pos ${posicionK}): ${puntosK} pts` : ''}
-Puntos de kills: ${puntosKills}
-Total de puntos: ${totalPuntos}
+${posicionK > 0 ? `• Mapa K (pos ${posicionK}): ${puntosK} pts` : ''}`
+
+*Puntos de kills:* ${puntosKills}
+*Total de puntos:* ${totalPuntos}
 ——————————————
-Incumplimiento de regla
+*Incumplimiento de regla*
 no aplica`;
 
     // Reaccionar al mensaje original
