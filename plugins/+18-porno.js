@@ -16,3 +16,4 @@ handler.command = ['nsfwloli', 'nsfwfoot', 'nsfwass', 'nsfwbdsm', 'nsfwcum', 'ns
 handler.tags = ['nsfw'];
 handler.group = true;
 export default handler;
+*/
