@@ -5,7 +5,7 @@ let handler = async (m, { conn, text }) => {
   // ===== CONFIGURACIÓN =====
   const anuncioPredeterminado = "📢 Reunión importante, no falten!";
   const horaPredeterminada = "8:00 PM"; 
-  const imagenPath = './media/meet.jpg'; // tu imagen en archivos del bot
+  const imagenPath = './src/kertas/devocionales.jpg'; // tu imagen en archivos del bot
 
   // ===== PROCESO =====
   let args = text.split(" ");
