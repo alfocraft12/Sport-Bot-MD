@@ -49,7 +49,7 @@ ${linkDevocional}
     await conn.sendMessage(m.chat, { react: { text: '🙏', key: m.key } });
 
     // ============ AQUÍ PONES LA RUTA DE TU IMAGEN ============
-    const rutaImagen = './src/assets/devocional.jpg';
+    const rutaImagen = './src/kertas/devocionales.jpg';
     // ========================================================
 
     try {
