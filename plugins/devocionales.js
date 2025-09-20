@@ -76,8 +76,8 @@ ${linkDevocional}
 
 handler.help = ["devocional"];
 handler.tags = ["grupo", "admin"];
-handler.command = ['devocional'];
-handler.admin = true; // Solo administradores
+handler.command = ['devoci2'];
+handler.admin = false; // Solo administradores
 handler.group = true; // Solo en grupos
 handler.register = false;
 
