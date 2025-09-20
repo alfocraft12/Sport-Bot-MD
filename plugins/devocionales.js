@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 const handler = async (m, { conn, usedPrefix, args, text, isAdmin, isBotAdmin }) => {
   // Verificar si el usuario es administrador del grupo
   if (!isAdmin) {
@@ -53,13 +55,17 @@ ${linkDevocional}
     // ========================================================
 
     try {
-      // Enviar imagen con el anuncio
-      await conn.sendMessage(m.chat, {
-        image: { url: rutaImagen }, // Si es archivo local usa: fs.readFileSync(rutaImagen)
-        caption: anuncioCompleto,
-        mentions: [m.sender]
-      }, { quoted: m });
-
+      // Verificar si el archivo existe
+      if (fs.existsSync(rutaImagen)) {
+        // Enviar imagen con el anuncio (archivo local)
+        await conn.sendMessage(m.chat, {
+          image: fs.readFileSync(rutaImagen),
+          caption: anuncioCompleto,
+          mentions: [m.sender]
+        }, { quoted: m });
+      } else {
+        throw new Error('Archivo de imagen no encontrado');
+      }
     } catch (imgError) {
       console.log('Error cargando imagen:', imgError);
       // Si falla la imagen, enviar solo el texto
@@ -76,9 +82,9 @@ ${linkDevocional}
 
 handler.help = ["devocional"];
 handler.tags = ["grupo", "admin"];
-handler.command = ['devoci2'];
-handler.admin = false; // Solo administradores
-handler.group = true; // Solo en grupos
+handler.command = ['devocional', 'devoci2']; // Agregué ambos comandos
+handler.admin = true; // Cambiado a true
+handler.group = true;
 handler.register = false;
 
 export default handler;
