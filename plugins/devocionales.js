@@ -1,90 +1,60 @@
-import fs from 'fs';
-
-const handler = async (m, { conn, usedPrefix, args, text, isAdmin, isBotAdmin }) => {
-  // Verificar si el usuario es administrador del grupo
+let handler = async (m, { conn, text, isAdmin }) => {
   if (!isAdmin) {
-    return conn.reply(m.chat, '❌ Solo los administradores del grupo pueden usar este comando.', m);
+    return m.reply('❌ Solo administradores pueden usar este comando.')
   }
 
   try {
-    // ============ AQUÍ VA EL MENSAJE DEL ANUNCIO ============
-    const mensajeDevocional = `esta es una prueba alfo`;
+    // Tu mensaje
+    let mensaje = `esta es una prueba alfo`
     
-    // Hora proporcionada por el usuario (opcional)
-    const hora = text ? text.trim() : '8:30 PM';
-
-    // Generar link único de Google Meet
-    const generarLinkMeet = () => {
-      const chars = 'abcdefghijklmnopqrstuvwxyz';
-      const nums = '0123456789';
+    // Hora
+    let hora = text ? text.trim() : '8:30 PM'
+    
+    // Generar link
+    let generarLink = () => {
+      let chars = 'abcdefghijklmnopqrstuvwxyz'
+      let nums = '0123456789'
       
-      const randomString = (length, chars) => {
-        let result = '';
+      let randomString = (length, charset) => {
+        let result = ''
         for (let i = 0; i < length; i++) {
-          result += chars.charAt(Math.floor(Math.random() * chars.length));
+          result += charset.charAt(Math.floor(Math.random() * charset.length))
         }
-        return result;
-      };
-
-      const part1 = randomString(3, chars);
-      const part2 = randomString(4, chars + nums);
-      const part3 = randomString(3, chars);
+        return result
+      }
       
-      return `https://meet.google.com/${part1}-${part2}-${part3}`;
-    };
-
-    // Generar el link único
-    const linkDevocional = generarLinkMeet();
-
-    // Crear el mensaje completo del anuncio
-    let anuncioCompleto = `${mensajeDevocional}
+      let part1 = randomString(3, chars)
+      let part2 = randomString(4, chars + nums)
+      let part3 = randomString(3, chars)
+      
+      return `https://meet.google.com/${part1}-${part2}-${part3}`
+    }
+    
+    let link = generarLink()
+    
+    let anuncio = `${mensaje}
 
 ——————————————
 *🔗 Link de acceso:*
-${linkDevocional}
+${link}
 
 *⏰ Hora:* ${hora}
 ——————————————
-*📱 Anunciado por:* @${m.sender.split('@')[0]}`;
+*📱 Anunciado por:* @${m.sender.split('@')[0]}`
 
-    // Reaccionar al mensaje del comando
-    await conn.sendMessage(m.chat, { react: { text: '🙏', key: m.key } });
-
-    // ============ AQUÍ PONES LA RUTA DE TU IMAGEN ============
-    const rutaImagen = './src/kertas/devocionales.jpg';
-    // ========================================================
-
-    try {
-      // Verificar si el archivo existe
-      if (fs.existsSync(rutaImagen)) {
-        // Enviar imagen con el anuncio (archivo local)
-        await conn.sendMessage(m.chat, {
-          image: fs.readFileSync(rutaImagen),
-          caption: anuncioCompleto,
-          mentions: [m.sender]
-        }, { quoted: m });
-      } else {
-        throw new Error('Archivo de imagen no encontrado');
-      }
-    } catch (imgError) {
-      console.log('Error cargando imagen:', imgError);
-      // Si falla la imagen, enviar solo el texto
-      await conn.reply(m.chat, anuncioCompleto + '\n\n⚠️ *Nota:* Imagen no disponible.', m, { 
-        mentions: [m.sender] 
-      });
-    }
-
+    // Enviar
+    await conn.reply(m.chat, anuncio, m, { mentions: [m.sender] })
+    
   } catch (error) {
-    console.error('Error en comando devocional:', error);
-    return conn.reply(m.chat, `❌ Error creando el anuncio del devocional: ${error.message}`, m);
+    console.error('Error:', error)
+    await m.reply('❌ Error en el comando')
   }
-};
+}
 
-handler.help = ["devocional"];
-handler.tags = ["grupo", "admin"];
-handler.command = ['devocional', 'devoci2']; // Agregué ambos comandos
-handler.admin = true; // Cambiado a true
-handler.group = true;
-handler.register = false;
+handler.help = ['devocionales']
+handler.tags = ['admin']
+handler.command = ['devocionales', 'devocional'] // Cambié aquí
+handler.admin = true
+handler.group = true
 
-export default handler;
+export default handler
