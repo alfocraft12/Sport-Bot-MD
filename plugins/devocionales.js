@@ -4,15 +4,6 @@ let handler = async (m, { conn, text, isAdmin }) => {
         return conn.reply(m.chat, '❌ Solo los administradores del grupo pueden usar este comando.', m)
     }
 
-    // ============ AQUÍ VA EL MENSAJE DEL ANUNCIO ============
-    let mensajeDevocional = `🙏 *¡Te invitamos al Devocional de hoy!*
-
-Acompáñanos en este momento especial de reflexión y crecimiento espiritual.
-
-👥 *Todos están invitados*
-💝 *Ven como estés, Dios te ama*`
-    // =====================================================
-
     // Hora proporcionada por el usuario (opcional)
     let hora = text ? text.trim() : '8:30 PM'
 
@@ -36,11 +27,15 @@ Acompáñanos en este momento especial de reflexión y crecimiento espiritual.
         return `https://meet.google.com/${part1}-${part2}-${part3}`
     }
 
-    // Generar el link único
     let linkDevocional = generarLinkMeet()
 
-    // Crear el mensaje completo del anuncio
-    let anuncioCompleto = `${mensajeDevocional}
+    // ============ AQUÍ VA EL MENSAJE DEL ANUNCIO ============
+    let mensajeDevocional = `🙏 *¡Te invitamos al Devocional de hoy!*
+
+Acompáñanos en este momento especial de reflexión y crecimiento espiritual.
+
+👥 *Todos están invitados*
+💝 *Ven como estés, Dios te ama*
 
 ——————————————
 *🔗 Link de acceso:*
@@ -48,11 +43,12 @@ ${linkDevocional}
 
 *⏰ Hora:* ${hora}
 ——————————————
-*📱 Anunciado por:* @${m.sender.split('@')[0]}`.trim()
+*📱 Anunciado por:* @${m.sender.split('@')[0]}
 
-    // ============ AQUÍ PONES LA RUTA DE TU IMAGEN ============
-    // Enviar imagen con el anuncio
-    await conn.sendFile(m.chat, './src/kertas/devocionales.jpg', 'devocionales.jpg', anuncioCompleto, m, false, { mentions: [m.sender] })
+${global.md}`.trim()
+
+    // Enviar imagen con texto
+    await conn.sendFile(m.chat, './src/kertas/devocionales.jpg', 'devocionales.jpg', mensajeDevocional, m)
 }
 
 handler.help = ['devocionales']
