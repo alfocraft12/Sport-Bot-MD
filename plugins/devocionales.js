@@ -1,36 +1,37 @@
-let handler = async (m, { conn, text, isAdmin }) => {
-    // Verificar si es administrador
-    if (!isAdmin) {
-        return conn.reply(m.chat, '❌ Solo los administradores del grupo pueden usar este comando.', m)
-    }
+// meet.js
+import fs from 'fs'
 
-    // Hora proporcionada por el usuario (opcional)
-    let hora = text ? text.trim() : '8:30 PM'
+let handler = async (m, { conn, text }) => {
+  // ===== CONFIGURACIÓN =====
+  const anuncioPredeterminado = "📢 Reunión importante, no falten!";
+  const horaPredeterminada = "8:00 PM"; // cámbiala si quieres un valor fijo
+  const imagenPath = './src/kertas/devocionales.jpg'; // ruta de la imagen dentro de tu bot
 
-    // ============ AQUÍ VA EL MENSAJE DEL ANUNCIO ============
-    let mensajeDevocional = `🙏 *¡Te invitamos al Devocional de hoy!*
+  // ===== PROCESO =====
+  let args = text.split(" ");
+  let hora = args[0] ? args[0] : horaPredeterminada;
 
-Acompáñanos en este momento especial de reflexión y crecimiento espiritual.
+  // Generar un link random de Google Meet
+  const caracteres = "abcdefghijklmnopqrstuvwxyz";
+  const randomStr = () => Array.from({ length: 3 }, () => caracteres[Math.floor(Math.random() * caracteres.length)]).join('');
+  let meetLink = `https://meet.google.com/${randomStr()}-${randomStr()}-${randomStr()}`;
+  
+  // ===== MENSAJE FINAL =====
+  let mensaje = `
+${anuncioPredeterminado}
 
-👥 *Todos están invitados*
-💝 *Ven como estés, Dios te ama*
+🕒 Hora: *${hora}*
+🔗 Link: ${meetLink}
+  `.trim();
 
-——————————————
-*⏰ Hora:* ${hora}
-——————————————
-*📱 Anunciado por:* @${m.sender.split('@')[0]}
-
-${global.md}`.trim()
-
-    // Enviar imagen con texto
-    await conn.sendFile(m.chat, './src/kertas/devocionales.jpg', 'devocionales.jpg', mensajeDevocional, m)
+  await conn.sendMessage(m.chat, { 
+    image: fs.readFileSync(imagenPath), 
+    caption: mensaje 
+  }, { quoted: m });
 }
 
-handler.help = ['devocionales']
-handler.tags = ['admin']
-handler.command = ['devocionales', 'devocional']
-handler.admin = true
-handler.group = true
-handler.register = false
+handler.help = ["meet [hora]"];
+handler.tags = ["tools"];
+handler.command = ["meet"];
 
-export default handler
+export default handler;
