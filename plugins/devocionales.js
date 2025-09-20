@@ -7,28 +7,6 @@ let handler = async (m, { conn, text, isAdmin }) => {
     // Hora proporcionada por el usuario (opcional)
     let hora = text ? text.trim() : '8:30 PM'
 
-    // Generar link único de Google Meet
-    let generarLinkMeet = () => {
-        let chars = 'abcdefghijklmnopqrstuvwxyz'
-        let nums = '0123456789'
-        
-        let randomString = (length, charset) => {
-            let result = ''
-            for (let i = 0; i < length; i++) {
-                result += charset.charAt(Math.floor(Math.random() * charset.length))
-            }
-            return result
-        }
-        
-        let part1 = randomString(3, chars)
-        let part2 = randomString(4, chars + nums)
-        let part3 = randomString(3, chars)
-        
-        return `https://meet.google.com/${part1}-${part2}-${part3}`
-    }
-
-    let linkDevocional = generarLinkMeet()
-
     // ============ AQUÍ VA EL MENSAJE DEL ANUNCIO ============
     let mensajeDevocional = `🙏 *¡Te invitamos al Devocional de hoy!*
 
@@ -38,9 +16,6 @@ Acompáñanos en este momento especial de reflexión y crecimiento espiritual.
 💝 *Ven como estés, Dios te ama*
 
 ——————————————
-*🔗 Link de acceso:*
-${linkDevocional}
-
 *⏰ Hora:* ${hora}
 ——————————————
 *📱 Anunciado por:* @${m.sender.split('@')[0]}
