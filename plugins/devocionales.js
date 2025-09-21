@@ -5,7 +5,7 @@ let handler = async (m, { conn, text }) => {
   // ===== CONFIGURACIÓN =====
   const anuncioPredeterminado = "📖 Devocional familiar, no falten!";
   const horaPredeterminada = "8:00 PM"; 
-  const imagenPath = './media/devocional.jpg'; // tu imagen en archivos del bot
+  const imagenPath = './src/kertas/devocionales.jpg'; // tu imagen en archivos del bot
 
   // ===== PROCESO =====
   let args = text.trim().split(/\s+/); // separa por espacios
