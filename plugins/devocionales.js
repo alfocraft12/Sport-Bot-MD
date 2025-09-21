@@ -1,16 +1,16 @@
-// meet.js
+// devocional.js
 import fs from 'fs'
 
 let handler = async (m, { conn, text }) => {
   // ===== CONFIGURACIÓN =====
-  const anuncioPredeterminado = "📢 Reunión importante, no falten!";
+  const anuncioPredeterminado = "📖 Devocional familiar, no falten!";
   const horaPredeterminada = "8:00 PM"; 
-  const imagenPath = './src/kertas/devocionales.jpg'; // tu imagen en archivos del bot
+  const imagenPath = './media/devocional.jpg'; // tu imagen en archivos del bot
 
   // ===== PROCESO =====
-  let args = text.split(" ");
-  let hora = args[0] ? args[0] : horaPredeterminada;
-  let link = args[1] ? args[1] : "🔗 (faltó poner el link de la reunión)";
+  let args = text.trim().split(/\s+/); // separa por espacios
+  let hora = args[0] || horaPredeterminada;
+  let link = args[1] || "⚠️ No se proporcionó un link de Meet";
 
   // ===== MENSAJE FINAL =====
   let mensaje = `
@@ -26,8 +26,8 @@ ${anuncioPredeterminado}
   }, { quoted: m });
 }
 
-handler.help = ["meet [hora] [link]"];
+handler.help = ["devocional [hora] [link]"];
 handler.tags = ["tools"];
-handler.command = ["devocional"];
+handler.command = /^devocional$/i; // regex correcto
 
 export default handler;
