@@ -14,7 +14,7 @@ var handler = async (m, { conn }) => {
 
 - *ᴰᶜᴬRojo* _(Decano)_
 
-- *Malfeth* _(Decano)_
+- *ᴰᶜᴬMalfeth* _(Decano)_
 
 - *ᴰᶜᴬAlfo* _(Decano)_
 
