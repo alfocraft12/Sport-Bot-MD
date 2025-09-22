@@ -3,16 +3,20 @@ import fs from 'fs'
 
 let handler = async (m, { conn, text }) => {
   // ===== CONFIGURACIÓN =====
-  const anuncioPredeterminado = "*Buenos dias Dios les bendiga a tod@s de una manera muy especial.*
+  const anuncioPredeterminado = `
+🙏 *Buenos días, Dios les bendiga a tod@s de una manera muy especial.*
 
-Hoy es Lunes de devocional.
-Tendremos un *predicador sorpresa 🙈*
-Los animo a que aprovechen la oportunidad de tener un devocional cada lunes.
+📖 *Hoy es Lunes de devocional*  
+🙈 *Tendremos un predicador sorpresa*  
 
-No se lo pierdan.
-Los esperamos a todos.";
+✨ Los animo a que aprovechen la oportunidad de tener un devocional cada lunes.  
+
+❗ *No se lo pierdan.*  
+👥 *Los esperamos a todos.*
+  `.trim();
+
   const horaPredeterminada = "8:30 PM"; 
-  const imagenPath = './src/kertas/devocionales2.jpg'; // tu imagen en archivos del bot
+  const imagenPath = './media/devocional2.jpg'; // tu imagen en archivos del bot
 
   // ===== PROCESO =====
   let args = text.trim().split(/\s+/); // separa por espacios
@@ -35,6 +39,6 @@ ${anuncioPredeterminado}
 
 handler.help = ["devocional [hora] [link]"];
 handler.tags = ["tools"];
-handler.command = /^devocional$/i; // regex correcto
+handler.command = /^devocional$/i;
 
 export default handler;
