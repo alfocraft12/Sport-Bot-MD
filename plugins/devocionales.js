@@ -3,8 +3,15 @@ import fs from 'fs'
 
 let handler = async (m, { conn, text }) => {
   // ===== CONFIGURACIÓN =====
-  const anuncioPredeterminado = "📖 Devocional familiar, no falten!";
-  const horaPredeterminada = "8:00 PM"; 
+  const anuncioPredeterminado = "*Buenos dias Dios les bendiga a tod@s de una manera muy especial.*
+
+Hoy es Lunes de devocional.
+Tendremos un *predicador sorpresa 🙈*
+Los animo a que aprovechen la oportunidad de tener un devocional cada lunes.
+
+No se lo pierdan.
+Los esperamos a todos.";
+  const horaPredeterminada = "8:30 PM"; 
   const imagenPath = './src/kertas/devocionales.jpg'; // tu imagen en archivos del bot
 
   // ===== PROCESO =====
