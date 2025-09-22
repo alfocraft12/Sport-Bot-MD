@@ -16,7 +16,7 @@ let handler = async (m, { conn, text }) => {
   `.trim();
 
   const horaPredeterminada = "8:30 PM"; 
-  const imagenPath = './media/devocional2.jpg'; // tu imagen en archivos del bot
+  const imagenPath = './src/kertas/devocional2.jpg'; // tu imagen en archivos del bot
 
   // ===== PROCESO =====
   let args = text.trim().split(/\s+/); // separa por espacios
