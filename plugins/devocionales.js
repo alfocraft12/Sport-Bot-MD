@@ -12,7 +12,7 @@ Los animo a que aprovechen la oportunidad de tener un devocional cada lunes.
 No se lo pierdan.
 Los esperamos a todos.";
   const horaPredeterminada = "8:30 PM"; 
-  const imagenPath = './src/kertas/devocionales.jpg'; // tu imagen en archivos del bot
+  const imagenPath = './src/kertas/devocionales2.jpg'; // tu imagen en archivos del bot
 
   // ===== PROCESO =====
   let args = text.trim().split(/\s+/); // separa por espacios
