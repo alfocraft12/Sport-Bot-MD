@@ -40,5 +40,7 @@ ${anuncioPredeterminado}
 handler.help = ["devocional [hora] [link]"];
 handler.tags = ["tools"];
 handler.command = /^devocional$/i;
+handler.group = true
+handler.admin = true
 
 export default handler;
