@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+/* import fetch from 'node-fetch'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   
@@ -140,3 +140,4 @@ handler.command = ['demo3']
 handler.owner = false
 
 export default handler
+*/
