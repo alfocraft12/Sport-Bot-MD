@@ -139,6 +139,6 @@ ____________________
 handler.help = ['demo2']
 handler.tags = ['owner']
 handler.command = ['demo2']
-handler.owner = true
+handler.owner = false
 
 export default handler
