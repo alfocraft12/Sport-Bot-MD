@@ -1,9 +1,7 @@
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  const owner = global.owner || ['573146171942'] // tu número
-  if (!owner.includes(m.sender.split('@')[0])) return m.reply('⚠️ Este comando solo puede usarlo el owner.')
-
+  
   let step = 0
   let data = {
     fecha: '',
