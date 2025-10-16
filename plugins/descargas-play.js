@@ -37,7 +37,7 @@ const ddownr = {
   cekProgress: async (id) => {
     const config = {
       method: 'GET',
-      url: `https://api.akuari.my.id/downloader/youtube?link=${id}`,
+      url: `https://yt1s.lol/api/ajax/progress.php?id=${id}`,
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, como Gecko) Chrome/91.0.4472.124 Safari/537.36'
       }
