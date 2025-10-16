@@ -252,14 +252,9 @@ console.error(e)
 }
 
 const detectwhat = m.sender.includes('@lid') ? '@lid' : '@s.whatsapp.net'
-const isROwner = global.owner
-    .filter(ownerData => Array.isArray(ownerData) && ownerData[0]) // Asegura que sea array y tenga primer elemento
-    .map(ownerData => String(ownerData[0]).replace(/[^0-9]/g, '') + detectwhat)
-    .includes(m.sender);
+const isROwner = [...global.owner.map(([number]) => number)].map(v => v.replace(/[^0-9]/g, '') + detectwhat).includes(m.sender)
 const isOwner = isROwner || m.fromMe
-const isMods = global.mods
-    .map(modData => String(modData[0]).replace(/[^0-9]/g, '') + detectwhat) // Si mods tiene la misma estructura
-    .includes(m.sender);
+const isMods = isOwner || global.mods.map(v => v.replace(/[^0-9]/g, '') + detectwhat).includes(m.sender);
 const isPrems = isROwner || global.db.data.users[m.sender].premiumTime > 0
 if (opts['queque'] && m.text && !(isMods || isPrems)) {
 let queque = this.msgqueque, time = 1000 * 5
@@ -271,11 +266,6 @@ await delay(time)
 }, time)
 }
 
-if (opts['nyimak']) return
-if (!isROwner && opts['self']) return 
-if (opts['pconly'] && m.chat.endsWith('g.us')) return
-if (opts['gconly'] && !m.chat.endsWith('g.us')) return
-if (opts['swonly'] && m.chat !== 'status@broadcast') return
 if (typeof m.text !== 'string')
 m.text = ''
 
@@ -398,7 +388,6 @@ if ((m.id.startsWith('NJX-') || (m.id.startsWith('BAE5') && m.id.length === 16) 
 if (!isAccept) {
 continue
 }
-
 m.plugin = name
 if (m.chat in global.db.data.chats || m.sender in global.db.data.users) {
 let chat = global.db.data.chats[m.chat]
@@ -542,7 +531,8 @@ if (quequeIndex !== -1)
 this.msgqueque.splice(quequeIndex, 1)
 }
 //console.log(global.db.data.users[m.sender])
-let user, stats = global.db.data.stats
+let user
+let stats = global.db.data.stats || (global.db.data.stats = {})
 if (m) { let utente = global.db.data.users[m.sender]
 if (utente.muto == true) {
 let bang = m.key.id
@@ -751,7 +741,7 @@ rowner: '[ ⚠︎ ] el comando es exclusivo para owners.',
     private: '[ ⚠︎ ] este comando solo se puede usar en chat privado.',
     admin: '[ ⚠︎ ] este comando solo lo pueden usar los admins del grupo.',
     botAdmin: '[ ⚠︎ ] para usar este comando es necesario que yo sea admin.',
-    unreg: '[⌨︎] 𝕙𝕠𝕝𝕒, 𝕓𝕚𝕖𝕟𝕧𝕖𝕟𝕚𝕕𝕠 𝕒 𝕝𝕒 𝕔𝕠𝕞𝕦𝕟𝕚𝕕𝕒𝕕 𝕕𝕖 𝕙𝕦𝕥𝕒𝕠-𝕞𝕕, 𝕝𝕖 𝕚𝕟𝕗𝕠𝕣𝕞𝕠 𝕢𝕦𝕖 𝕟𝕠 𝕤𝕖 𝕖𝕟𝕔𝕦𝕖𝕟𝕥𝕣𝕒 𝕣𝕖𝕘𝕚𝕤𝕥𝕣𝕒𝕕𝕠, 𝕡𝕒𝕣𝕒 𝕙𝕒𝕔𝕖𝕣𝕝𝕠 𝕦𝕤𝕖 𝕖𝕝 𝕔𝕠𝕞𝕒𝕟𝕕𝕠\n\n!Reg Name.22\n\n𝕒𝕢𝕦𝕚 𝕦𝕟 𝕖𝕛𝕖𝕞𝕡𝕝𝕠 = !reg huato.22\n\n\n 𝕖𝕤𝕡𝕖𝕣𝕠 𝕙𝕒𝕪𝕒𝕤 𝕖𝕟𝕥𝕖𝕟𝕕𝕚𝕕𝕠 𝕪 𝕒𝕤𝕚 𝕡𝕦𝕖𝕕𝕒𝕤 𝕦𝕤𝕒𝕣 𝕖𝕝 𝕓𝕠𝕥',
+    unreg: '[⌨︎] 𝕙𝕠𝕝𝕒, 𝕓𝕚𝕖𝕟𝕧𝕖𝕟𝕚𝕕𝕠 𝕒 𝕝𝕒 𝕔𝕠𝕞𝕦𝕟𝕚𝕕𝕒𝕕 𝕕𝕖 Sport-Bot-MD, 𝕝𝕖 𝕚𝕟𝕗𝕠𝕣𝕞𝕠 𝕢𝕦𝕖 𝕟𝕠 𝕤𝕖 𝕖𝕟𝕔𝕦𝕖𝕟𝕥𝕣𝕒 𝕣𝕖𝕘𝕚𝕤𝕥𝕣𝕒𝕕𝕠, 𝕡𝕒𝕣𝕒 𝕙𝕒𝕔𝕖𝕣𝕝𝕠 𝕦𝕤𝕖 𝕖𝕝 𝕔𝕠𝕞𝕒𝕟𝕕𝕠\n\n!Reg Name.22\n\n𝕒𝕢𝕦𝕚 𝕦𝕟 𝕖𝕛𝕖𝕞𝕡𝕝𝕠 = !reg huato.22\n\n\n 𝕖𝕤𝕡𝕖𝕣𝕠 𝕙𝕒𝕪𝕒𝕤 𝕖𝕟𝕥𝕖𝕟𝕕𝕚𝕕𝕠 𝕪 𝕒𝕤𝕚 𝕡𝕦𝕖𝕕𝕒𝕤 𝕦𝕤𝕒𝕣 𝕖𝕝 𝕓𝕠𝕥',
     restrict: '[ ⚠︎ ] This command is restricted/disables owner',
        restrict: '[ ⚠︎ ]\nᴱˢᵗᵉ ᶜᵒᵐᵃⁿᵈᵒ ᴱˢᵗᵃ ᴿᵉˢᵗʳⁱⁿᵍⁱᵈᵒ/ᴰᵉˢᵃᶜᵗⁱᵛᵃ ᴾᵒʳ ᴰᵉˢⁱᶜⁱᵒⁿ ᴰᵉˡ ᴾʳᵒᵖⁱᵉᵗᵃʳⁱᵒ/ᴬ (ᵒʷⁿᵉʳ) ᴰᵉˡ ᴮᵒᵗ'
 }[type];
