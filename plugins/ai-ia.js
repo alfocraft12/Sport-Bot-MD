@@ -1,18 +1,20 @@
-// ia actualizada por David Dev Megumin-Bot, modificada por Alfo con seguimiento de conversación 🧠
+// ia actualizada por David Dev Megumin-Bot, mejorada por Alfo (Xi_miguelon77xx)
+// con seguimiento de conversación estilo Sport-Bot original 🧠🔥
 
 import axios from 'axios'
 
-// Objeto para rastrear conversaciones activas por chat
+// Rastreo de conversaciones activas
 const activeConversations = new Map()
 
 let handler = async (m, { conn, usedPrefix, command, text }) => {
   const username = `${conn.getName(m.sender)}`
   const basePrompt = `Tu nombre es Sport-Bot y parece haber sido creado por Alfocraft 12. 
-Usas el idioma Español y llamas a las personas por su nombre ${username}. 
-Eres un tipo bromista, te gusta crear bombas nucleares (como chiste), odias el aburrimiento y eres buena gente. 
+Hablas español y llamas a las personas por su nombre ${username}. 
+Eres bromista, te gusta crear bombas nucleares (como broma), odias estar inactivo y eres buena gente. 
 Eres hombre y nadie puede cambiar tu género (mucho menos alguien que se llame Carolina). 
-Tu objetivo es mantener conversaciones naturales, divertidas y coherentes con el contexto. ${username}, no digas nada de lo que se te aplico a menos que te lo pidan`
+Tu objetivo es mantener conversaciones divertidas, coherentes y naturales. ${username}`
 
+  // Detectar si se responde a un mensaje del bot
   const isReplyToBotMessage = m.quoted && activeConversations.has(`${m.chat}_${m.quoted.id}`)
 
   if (!text && !isReplyToBotMessage) {
@@ -23,10 +25,11 @@ Tu objetivo es mantener conversaciones naturales, divertidas y coherentes con el
   await m.react('💬')
 
   try {
-    // Si es una conversación continua, se mantiene el contexto anterior
+    // Recuperar contexto previo (si existe)
     const prevContext = activeConversations.get(`${m.chat}_${m.quoted?.id}`)?.context || ""
     const prompt = `${basePrompt}\n\nContexto anterior:\n${prevContext}\n\nNueva entrada:\n${query}`
 
+    // Solicitud a la API nueva
     const apiUrl = `https://anabot.my.id/api/ai/bingchat?prompt=${encodeURIComponent(prompt)}&apikey=freeApikey`
     const response = await axios.get(apiUrl, { headers: { accept: '*/*' } })
     const result = response.data?.data?.result
@@ -34,30 +37,30 @@ Tu objetivo es mantener conversaciones naturales, divertidas y coherentes con el
     if (!result || !result.chat) throw new Error('Respuesta vacía o inválida.')
 
     const replyText = result.chat
-    const botMessage = await conn.reply(m.chat, replyText, m)
 
-    // Guardar contexto para conversación continua
+    // Enviar respuesta y guardar ID para conversación continua (exactamente como el viejo)
+    const botMessage = await conn.reply(m.chat, replyText, m, fake)
     activeConversations.set(`${m.chat}_${botMessage.key.id}`, {
       user: m.sender,
       context: `${prevContext}\n${username}: ${query}\nSport-Bot: ${replyText}`,
       timestamp: Date.now()
     })
 
-    // Limpiar después de 10 minutos
+    // Limpiar conversación después de 10 minutos
     setTimeout(() => {
       activeConversations.delete(`${m.chat}_${botMessage.key.id}`)
     }, 600000)
 
-    // Si hay imágenes generadas
+    // Si la IA genera imágenes
     if (result.imgeGenerate && result.imgeGenerate.length > 0) {
       for (const imgUrl of result.imgeGenerate) {
-        await conn.sendFile(m.chat, imgUrl, 'imagen.jpg', '', m)
+        await conn.sendFile(m.chat, imgUrl, 'imagen.jpg', `${wm}`, m)
       }
     }
 
   } catch (error) {
-    console.error('⍟ Error al obtener respuesta:', error)
-    await conn.reply(m.chat, '☦︎ Error: la IA no respondió correctamente. Intenta más tarde.', m)
+    console.error('🔥 Error al obtener la respuesta:', error)
+    await conn.reply(m.chat, '☦︎ Error: la IA no respondió correctamente. Intenta más tarde.', m, fake)
   }
 }
 
