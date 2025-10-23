@@ -24,7 +24,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
 
     const apiUrl = `https://anabot.my.id/api/ai/bingchat?prompt=${encodeURIComponent(prompt)}&apikey=freeApikey`
     const response = await axios.get(apiUrl, { headers: { accept: '*/*' } })
-    const result = response.data?.data?.result
+    /* const result = response.data?.data?.result
 
     if (!result || !result.chat) throw new Error('Respuesta vacía o inválida.')
 
