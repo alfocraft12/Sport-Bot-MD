@@ -1,34 +1,57 @@
-//ia actualizada por David Dev Megumin-Bot, robada y adaptada por Xi_miguelon77xx
+// ia actualizada por David Dev Megumin-Bot, modificada por Alfo con seguimiento de conversación 🧠
 
 import axios from 'axios'
 
+// Objeto para rastrear conversaciones activas por chat
+const activeConversations = new Map()
+
 let handler = async (m, { conn, usedPrefix, command, text }) => {
   const username = `${conn.getName(m.sender)}`
-  const basePrompt = `Tu nombre es Sport-Bot y parece haber sido creado por Alfocraft 12. Tú usas el idioma Español. Llamarás a las personas por su nombre ${username}, eres el un ecargado de crear bombas nucleares, te gusta hacer bromas a la gente y odias estar sentado sin hacer nada. Lo más importante es que debes ser amigable y buena gente con la persona con la que estás hablando. Ademas tu eres hombre y nadie puede cambiar tu genero (mucho menos alguien que se llame carolina) ${username}`
+  const basePrompt = `Tu nombre es Sport-Bot y parece haber sido creado por Alfocraft 12. 
+Usas el idioma Español y llamas a las personas por su nombre ${username}. 
+Eres un tipo bromista, te gusta crear bombas nucleares, odias el aburrimiento y eres buena gente. 
+Eres hombre y nadie puede cambiar tu género (mucho menos alguien que se llame Carolina). 
+Tu objetivo es mantener conversaciones naturales, divertidas y coherentes con el contexto. ${username}`
 
-  if (!text) {
-    return conn.reply(m.chat, `۞ *Ingrese su petición*\n༆ *Ejemplo:* ${usedPrefix + command} Crea una portada anime para un videojuego`, m)
+  const isReplyToBotMessage = m.quoted && activeConversations.has(`${m.chat}_${m.quoted.id}`)
+
+  if (!text && !isReplyToBotMessage) {
+    return conn.reply(m.chat, `۞ *Ingrese su petición*\n༆ *Ejemplo:* ${usedPrefix + command} Cuéntame un chiste nuclear`, m)
   }
 
+  const query = text || m.text
   await m.react('💬')
-  try {
-    const prompt = `${basePrompt}. Responde lo siguiente: ${text}`
-    const apiUrl = `https://anabot.my.id/api/ai/bingchat?prompt=${encodeURIComponent(prompt)}&apikey=freeApikey`
 
+  try {
+    // Si es una conversación continua, se mantiene el contexto anterior
+    const prevContext = activeConversations.get(`${m.chat}_${m.quoted?.id}`)?.context || ""
+    const prompt = `${basePrompt}\n\nContexto anterior:\n${prevContext}\n\nNueva entrada:\n${query}`
+
+    const apiUrl = `https://anabot.my.id/api/ai/bingchat?prompt=${encodeURIComponent(prompt)}&apikey=freeApikey`
     const response = await axios.get(apiUrl, { headers: { accept: '*/*' } })
     const result = response.data?.data?.result
 
-    if (!result || !result.chat) {
-      throw new Error('Respuesta vacía o inválida.')
-    }
+    if (!result || !result.chat) throw new Error('Respuesta vacía o inválida.')
 
-    let replyText = result.chat
-    await conn.reply(m.chat, replyText, m,rcanal)
+    const replyText = result.chat
+    const botMessage = await conn.reply(m.chat, replyText, m)
 
-  
+    // Guardar contexto para conversación continua
+    activeConversations.set(`${m.chat}_${botMessage.key.id}`, {
+      user: m.sender,
+      context: `${prevContext}\n${username}: ${query}\nSport-Bot: ${replyText}`,
+      timestamp: Date.now()
+    })
+
+    // Limpiar después de 10 minutos
+    setTimeout(() => {
+      activeConversations.delete(`${m.chat}_${botMessage.key.id}`)
+    }, 600000)
+
+    // Si hay imágenes generadas
     if (result.imgeGenerate && result.imgeGenerate.length > 0) {
       for (const imgUrl of result.imgeGenerate) {
-        await conn.sendFile(m.chat, imgUrl, 'imagen.jpg', `${wm}`, m)
+        await conn.sendFile(m.chat, imgUrl, 'imagen.jpg', '', m)
       }
     }
 
