@@ -1,6 +1,6 @@
 // ia actualizada por David Dev Megumin-Bot, modificada por Alfo con seguimiento de conversación 🧠
 
-import axios from 'axios'
+/* import axios from 'axios'
 
 // Objeto para rastrear conversaciones activas por chat
 const activeConversations = new Map()
