@@ -10,13 +10,15 @@ var handler = async (m, { conn }) => {
 
 - *ᴰᶜᴬBarbie* _(líder principal)_
 
-- *Yeiko FN* _(líder interino)_
+- *ᴰᶜᴬAlfo* _(líder interino)_
 
 - *ᴰᶜᴬRojo* _(Decano)_
 
 - *ᴰᶜᴬMalfeth* _(Decano)_
 
-- *ᴰᶜᴬAlfo* _(Decano)_
+- *ᴰᶜᴬGuzman* _(Decano)_
+
+- *Fk| Jhon* _(Decano)_
 
 *//////////////////////*
 
