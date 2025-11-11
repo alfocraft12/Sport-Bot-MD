@@ -1,6 +1,6 @@
 //Codígo creado por DAVID CHIAN!! PERRAS wa.me/5351524614
 
-import fs from 'fs';
+/* import fs from 'fs';
 import path from 'path';
 import uploadImage from '../lib/uploadImage.js'
 import { sticker } from '../lib/sticker.js';

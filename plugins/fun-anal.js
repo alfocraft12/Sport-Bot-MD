@@ -1,4 +1,4 @@
-import fs from 'fs';
+/* import fs from 'fs';
 import path from 'path';
 import uploadImage from '../lib/uploadImage.js'
 import { sticker } from '../lib/sticker.js';
