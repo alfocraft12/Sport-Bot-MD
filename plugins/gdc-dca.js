@@ -12,6 +12,8 @@ var handler = async (m, { conn }) => {
 
 - *ᴰᶜᴬAlfo* _(líder interino)_
 
+- - *ᴰᶜᴬX_X* _(Decano)_
+
 - *ᴰᶜᴬRojo* _(Decano)_
 
 - *ᴰᶜᴬMalfeth* _(Decano)_
