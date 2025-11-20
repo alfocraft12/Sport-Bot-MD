@@ -129,8 +129,8 @@ console.log(chalk.bold.redBright(`No se permiten numeros que no sean 1 o 2, tamp
 } 
 
     console.info = () => { }
-
-/*const connectionOptions = {
+// aqui es que se pone
+const connectionOptions = {
     logger: pino({ level: "silent" }),
     printQRInTerminal: opcion == "1" ? true : methodCodeQR ? true : false,
     mobile: MethodMobile,
@@ -150,8 +150,8 @@ console.log(chalk.bold.redBright(`No se permiten numeros que no sean 1 o 2, tamp
     msgRetryCounterMap,
     defaultQueryTimeoutMs: undefined,
     version,
-}*/
-
+}
+// aca se cierra
 const connectionOptions = {
 logger: pino({ level: 'silent' }),
 printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
