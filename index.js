@@ -130,7 +130,7 @@ console.log(chalk.bold.redBright(`No se permiten numeros que no sean 1 o 2, tamp
 
     console.info = () => { }
 // aqui es que se pone
-const connectionOptions = {
+/*const connectionOptions = {
     logger: pino({ level: "silent" }),
     printQRInTerminal: opcion == "1" ? true : methodCodeQR ? true : false,
     mobile: MethodMobile,
@@ -150,7 +150,7 @@ const connectionOptions = {
     msgRetryCounterMap,
     defaultQueryTimeoutMs: undefined,
     version,
-}
+}*/
 // aca se cierra
 const connectionOptions = {
 logger: pino({ level: 'silent' }),
